@@ -1,0 +1,946 @@
+﻿@page "/Datasets/{DatasetId:int}"
+@inherits AppPageBase
+<PageTitle>@vm.Name</PageTitle>
+<Breadcrumbs PageName="Dataset" DatasetName="@vm.DatasetName" DatasetId="@DatasetId"></Breadcrumbs>
+
+<div class="page-header">
+    <div>
+        <span class="page-header-title">@vm.Name</span>
+        &nbsp;
+        <i class="ui edit outline icon pointer" @onclick="ShowEditDatasetModal"></i>
+        &nbsp;
+        @if (vm.Id == AppVm.CurrentDatasetId)
+        {
+            <div class="ui green horizontal label" style="vertical-align: top">Selected</div>
+        }
+        @if(vm.IsRemoved)
+        {
+            <div class="ui red horizontal label" style="vertical-align: top">Removed</div>
+        }
+    </div>
+    <div>
+        @if (DatasetId == AppVm.CurrentDatasetId)
+        {
+            if (vm.ImagesCount > 0 && vm.ImagesWithFeatures != vm.ImagesCount)
+            {
+                <button class="ui small compact primary button @(vm.ShowTrimLoader ? "loading" : "")" @onclick="GenerateRandomFeatures">Generate Random Features</button>
+                <button class="ui small compact button @(vm.ShowTrimLoader ? "loading" : "")" @onclick="RemoveImagesWithoutFeatures">Remove Images without Features</button>
+            }
+        }
+        else
+        {
+            <button class="ui small compact primary button" @onclick="() => Select()">Select</button>
+        }
+        @if(!vm.IsLocked && vm.ImagesWithFeatures > 0 && vm.ImagesWithFeatures == vm.ImagesCount)
+        {
+            <button class="ui small compact primary button" @onclick="() => Lock()">Lock</button>
+        }
+        <button class="ui small compact basic icon button" @onclick="DisplayDataset">
+            <i class="icon sync alternate"></i>
+        </button>
+        <div id="settings-dropdown" class="ui dropdown icon top left pointing small compact basic button">
+            <i class="ellipsis vertical icon"></i>
+            <div class="menu">
+                <div class="item" @onclick="GenerateRandomFeatures">Generate Random Features</div>
+                <div class="item" @onclick="ResetCaesarDatasets">Reset Caesar Datasets</div>
+                <div class="item" @onclick="RemoveAllLabels">Remove All Labels</div>
+                @if(vm.DatasetUserId == AppVm.UserId)
+                {
+                    <div class="item" @onclick="() => RemoveDataset()">Remove Dataset</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function initSettingsDropdown() {
+    $('#settings-dropdown').dropdown();
+    }
+</script>
+
+@if (vm.Description.Length > 0)
+{
+    <div style="font-style: italic; margin-bottom: 10px;">
+        @vm.Description
+    </div>
+}
+
+<div class="ui three column grid">
+    @if (!vm.IsLocked)
+    {
+        <div class="column">
+            <div class="ui message">
+                <div class="header">Dataset creation guide</div>
+                <div style="font-size: 12px"> </div>
+                <p>
+                    @if (vm.ImagesCount > 0) 
+                    { 
+                        <i class="green check circle outline icon" /> 
+                    }
+                    else 
+                    {
+                        <span>• </span>
+                    }
+                    <a href="/FileExplorer/Library">Add</a> FITS images to the dataset 
+                </p>
+                <p>
+                    @if (vm.ImagesWithFeatures > 0) 
+                    { 
+                        <i class="green check circle outline icon" /> 
+                    }
+                    else 
+                    {
+                        <span>• </span>
+                    }
+                    @if (vm.ImagesCount > 0 )
+                    {
+                        <a href="/FileExplorer/Library">Import</a>
+                    }
+                    else
+                    {
+                        <span>Import</span>
+                    }
+                    features from a Caesar Dataset (featdata json file) or 
+                    @if (vm.ImagesCount > 0 )
+                    {
+                        <a href="javascript:void(0)" @onclick="GenerateRandomFeatures">generate random features</a>
+                    }
+                    else
+                    {
+                        <span>generate random features</span>
+                    }
+                </p>
+                <p>
+                    @if (vm.ImagesWithFeatures > 0 && vm.ImagesWithFeatures == vm.ImagesCount)
+                    { 
+                        <i class="green check circle outline icon" /> 
+                    }
+                    else 
+                    {
+                        <span>• </span>
+                    }
+                    Ensure every image has features. 
+                    @if (vm.ImagesWithFeatures > 0)
+                    {
+                        <a href="javascript:void(0)" @onclick="RemoveImagesWithoutFeatures">Remove images without features</a>
+                    }
+                    else
+                    {
+                        <span>Remove images without features</span>
+                    }
+                    if necessary
+                </p>
+                <p>
+                    <span>• </span>
+                    @if (vm.ImagesWithFeatures > 0 && vm.ImagesWithFeatures == vm.ImagesCount) 
+                    { 
+                        <a href="javascript:void(0)" @onclick="() => Lock()">Lock</a>
+                    }
+                    else 
+                    {
+                        <span>Lock</Span> 
+                    }
+                    dataset. This will prevent adding or removing images from dataset
+                </p>
+            </div>
+        </div>
+    } 
+    else if (vm.IsLocked && !vm.DisplayModes.Any(r => r.PixPlotJobStatus == HangfireJobStatus.Completed && r.CaesarDatasetJobStatus == HangfireJobStatus.Completed))
+    {
+        <div class="column">
+            <div class="ui message">
+                <div class="header">Dataset creation guide</div>
+                <div style="font-size: 12px"> </div>
+                <p>
+                    @if (vm.DisplayModes.Any(r => r.RenderJobStatus == HangfireJobStatus.Completed))
+                    { 
+                        <i class="green check circle outline icon" /> 
+                    }
+                    else 
+                    {
+                        <span>• </span>
+                    }
+                    <a href="javascript:void(0)" @onclick="ShowAddDisplayModeModal">Add Display Mode</a> and wait for rendering process to complete
+                </p>
+                <p>
+                    <span>• </span>
+                    Generate PixPlot and Caesar Dataset for a render mode
+                </p>
+            </div>
+        </div>
+    }
+    <div class="column">
+        <table class="ui basic celled table">
+            <tbody>
+                <tr>
+                    <td>
+                        FITS Images
+                    </td>
+                    <td class="right aligned">@vm.ImagesCount</td>
+                    <td>
+                        @if (DatasetId == AppVm.CurrentDatasetId)
+                        {
+                            if (!vm.IsLocked)
+                            {
+                                <a href="/FileExplorer/Library">Add</a>
+
+                                if (vm.ImagesCount > 0)
+                                {
+                                    <span> / </span>
+                                }
+                            }
+                        }
+                        @if (vm.ImagesCount > 0) 
+                        {
+                            <a href="/Datasets/@vm.Id/Images">View</a>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Features</td>
+                    <td class="right aligned">
+                        @if (vm.FeaturesCount > 0)
+                        {
+                            <div class="ui green horizontal label" style="vertical-align: top">@vm.FeaturesCount</div> 
+                        }
+                        @vm.ImagesWithFeatures / @vm.ImagesCount</td>
+                    <td>
+                        @if (vm.ImagesCount > 0)
+                        {
+                            if (DatasetId == AppVm.CurrentDatasetId)
+                            {
+                                <a href="/FileExplorer/Library">Import</a>
+                            }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Changes</td>
+                    <td class="right aligned">@vm.ChangesCount</td>
+                    <td>
+                        @if (vm.ChangesCount > 0)
+                        {
+                            <a href="/Datasets/@vm.Id/Changes">View</a>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jobs</td>
+                    <td class="right aligned">@vm.JobsCount</td>
+                    <td>
+                        @if (vm.JobsCount > 0)
+                        {
+                            <a href="/Datasets/@vm.Id/Jobs">View</a>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    @if (vm.IsLocked)
+    {
+        <div class="column">
+            <div class="ui two column grid">
+                <div class="column">
+                    <a href="/Datasets/@DatasetId/Umap">UMAP</a>
+                    <br />
+                    <a href="/Datasets/@DatasetId/Hdbscan">HDBSCAN</a>
+                    <br />
+                    <a href="/Datasets/@DatasetId/OutlierFinder">Outlier Finder</a>
+                    <br />
+                    <a href="/Datasets/@DatasetId/SimilaritySearch">Similarity Search</a>
+                    <br />
+                    <a href="/Datasets/@DatasetId/IndividualSimilaritySearch">Individual Similarity Search</a>
+                </div>
+                <div class="column">
+                    <a href="/Datasets/@DatasetId/MorphologyClassifier">Morphology Classifier</a>
+                    <br />
+                    <a href="/Datasets/@DatasetId/Exports">Data Exports</a>   
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (vm.DatasetJobs.Count > 0)
+{
+    <div class="page-header">
+        <span class="page-header-title">Active Jobs</span>
+    </div>
+
+    <table class="ui striped table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Status</th>
+                <th>User</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var job in vm.DatasetJobs)
+            {
+                <tr>
+                    <td>@job.Type</td>
+                    <td>
+                        <a href="/Jobs/jobs/details/@job.JobId">
+                            <HangfireJobStatusLabel Status="job.JobStatus" />
+                        </a>
+                    </td>
+                    <td>@job.User.DisplayName</td>
+                    <td>@job.Date</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (vm.IsLocked)
+{
+    <div class="page-header">
+        <span class="page-header-title">Display Modes</span>
+        <div>
+            <button class="ui small compact basic button" @onclick="ShowAddDisplayModeModal">Add Display Mode</button>
+        </div>
+    </div>
+
+    <table class="ui striped table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Renders</th>
+                <th>PixPlot</th>
+                <th>Caesar Dataset</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mode in vm.DisplayModes)
+            {
+                <tr>
+                    <td>
+                        <a href="/Datasets/@vm.Id/Images?DisplayModeId=@mode.Id">@mode.Name</a>
+                        @if (mode.IsFits())
+                        {
+
+                        }
+                        else 
+                        {
+                            <span> </span>
+                            <a href="javascript:void(0)" @onclick="() => ShowDisplayModeParams(mode.Id)"><i class="question circle outline icon"></i></a>
+                        }
+                        @if (mode.IsDefault)
+                        {
+                            <div class="ui horizontal label" style="vertical-align: top">Default</div>
+                        }
+                    </td>
+                    <td>
+                        @if (mode.IsFits())
+                        {
+                            <span>N/A</span>
+                        }
+                        else 
+                        {
+                            <a href="/Jobs/jobs/details/@mode.RenderJobId">
+                                <HangfireJobStatusLabel Status="mode.RenderJobStatus" />
+                            </a>
+                        }
+                    </td>
+                    <td>
+                        @if (mode.IsFits())
+                        {
+                            <span>N/A</span>
+                        }
+                        else 
+                        {
+                            if (mode.RenderJobStatus == HangfireJobStatus.Completed)
+                            {
+                                if (mode.PixPlotJobStatus == HangfireJobStatus.None)
+                                {
+                                    <a href="javascript:void(0)" @onclick="() => ShowGeneratePixPlotModal(mode.Id)">Generate</a>
+                                } 
+                                else
+                                {
+                                    <a href="/Jobs/jobs/details/@mode.PixPlotJobId">
+                                        <HangfireJobStatusLabel Status="mode.PixPlotJobStatus" />
+                                    </a>
+                                }
+
+                                if  (mode.PixPlotJobStatus == HangfireJobStatus.Completed)
+                                {
+                                    <span>/ </span>
+                                    <a href="javascript:void(0)" @onclick="() => ShowGeneratePixPlotModal(mode.Id)">Generate</a>
+                                    <span> / </span>
+                                    <a href="/Datasets/@vm.Id/DisplayModes/@mode.Id/Map" target="_blank">View</a>
+                                    <a href="javascript:void(0)" @onclick="() => ShowPixPlotParams(mode.Id)"><i class="question circle outline icon"></i></a>
+                                }   
+                            } 
+                            else
+                            {
+                                <span>Waiting for <a href="/Jobs/jobs/details/@mode.RenderJobId">Renders</a></span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @if (mode.IsFits() || mode.RenderJobStatus == HangfireJobStatus.Completed)
+                        {
+                            if (mode.CaesarDatasetJobStatus == HangfireJobStatus.None)
+                            {
+                                <a href="javascript:void(0)" @onclick="() => GenerateCaesarDataset(mode.Id)">Generate</a>
+                            } 
+                            else
+                            {
+                                <a href="/Jobs/jobs/details/@mode.CaesarDatasetJobId">
+                                    <HangfireJobStatusLabel Status="mode.CaesarDatasetJobStatus" />
+                                </a>
+                                if (mode.CaesarDatasetJobStatus == HangfireJobStatus.Completed)
+                                {
+                                    <span>/ </span>
+                                    <a href="javascript:void(0)" @onclick="() => GenerateCaesarDataset(mode.Id)">Generate</a>
+                                    @if (vm.DatasetModifiedDate > mode.CaesarDatasetCreatedAt || mode.CaesarDatasetCreatedAt == null)
+                                    {
+                                        <span data-tooltip="Caesar Dataset is out of date. Click 'Generate' to get actual version.">
+                                            &nbsp;<i class="clock outline icon"></i>
+                                        </span>
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <span>Waiting for <a href="/Jobs/jobs/details/@mode.RenderJobId">Renders</a></span>
+                        }
+                    </td>
+                    <td class="collapsing">
+                        @if (mode.IsFits() || mode.IsDefault)
+                        {
+                        }
+                        else 
+                        {
+                            <button class="ui small compact basic icon button" @onclick="() => SetDisplayModeDefault(mode.Id)">
+                                Make Default
+                            </button>
+                            <button class="ui small compact basic icon button" @onclick="() => RemoveDisplayMode(mode.Id)">
+                                <i class="icon trash"></i>
+                            </button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if(vm.Jobs.Count > 0)
+    {
+        <div class="page-header">
+            <span class="page-header-title">Function History</span>
+            <button class="ui small compact basic icon button" @onclick="DisplayDataset">
+                <i class="icon sync alternate"></i>
+            </button>
+        </div>
+
+        <table class="ui selectable striped table">
+            <thead>
+                <tr>
+                    <th>Function</th>
+                    <th>Caesar Dataset</th>
+                    <th>Status</th>
+                    <th>Caesar Job State</th>
+                    <th>Started</th>
+                    <th>Duration</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var job in vm.Jobs)
+                {
+                    var hasPixPlot = job.DisplayMode.PixPlotJobStatus == HangfireJobStatus.Completed;
+                    var displayModeId = job.DisplayModeId;
+
+                    if (job.DisplayMode.IsFits())
+                    {
+                        var defaultDisplayMode = vm.DisplayModes.FirstOrDefault(r => r.IsDefault);
+                        if (defaultDisplayMode != null)
+                        {
+                            hasPixPlot = defaultDisplayMode.PixPlotJobStatus == HangfireJobStatus.Completed;
+                            displayModeId = defaultDisplayMode.Id;
+                        }
+                    }
+
+                    <tr>
+                        <td><a href="/Datasets/@DatasetId/Functions/@job.Id">@job.AppName</a></td>
+                        <td>@job.DisplayMode.Name</td>
+                        <td>
+                            @if (job.ResultJobId == null)
+                            {
+                                <HangfireJobStatusLabel Status="job.ResultJobStatus" />
+                            }
+                            else 
+                            {
+                                <a href="/Jobs/jobs/details/@job.ResultJobId">
+                                    <HangfireJobStatusLabel Status="job.ResultJobStatus" />
+                                </a>
+                            }
+                        </td>
+                        <td><span data-tooltip="@job.CaesarJobStatus">@job.CaesarJobState</span></td>
+                        <td>@job.StartedDate</td>
+                        <td>
+                            @if (job.FinishedDate != null)
+                            {
+                                <span>@((job.FinishedDate.Value - job.StartedDate).ToString(@"hh\:mm\:ss"))</span>
+                            }
+                            else
+                            {
+                                <span>@((DateTime.UtcNow - job.StartedDate).ToString(@"hh\:mm\:ss"))</span>
+                            }
+                        </td>
+                        <td class="collapsing">
+                            @if (job.ResultJobStatus == HangfireJobStatus.Completed)
+                            {
+                                if (job.AppName == CaesarJob.UMAP)
+                                {
+                                }
+                                else if (job.AppName == CaesarJob.HDBSCAN)
+                                {
+                                    <a href="/Datasets/@DatasetId/Hdbscan/@job.Id/Clusters" class="ui basic small compact button">View</a>
+                                }
+                                else if (job.AppName == CaesarJob.OUTLIER_FINDER)
+                                {
+                                    <a href="/Datasets/@DatasetId/Outliers/@job.Id" class="ui basic small compact button">View</a>
+                                }
+                                else if (job.AppName == CaesarJob.SIMILARITY_SEARCH)
+                                {
+                                    <a href="/Datasets/@DatasetId/Similars/@job.Id" class="ui basic small compact button">View</a>
+                                }
+                                else if (job.AppName == CaesarJob.INDIVIDUAL_SIMILARITY_SEARCH)
+                                {
+                                    <a href="/Datasets/@DatasetId/IndividualSimilars/@job.Id" class="ui basic small compact button">View</a>
+                                }
+                                else if (job.AppName == CaesarJob.MORPHOLOGY_CLASSIFIER)
+                                {
+                                    <a href="/Datasets/@DatasetId/Predictions/@job.Id" class="ui basic small compact button">View</a>
+                                }
+                            }
+                        </td>
+                        <td class="collapsing">
+                            @if (job.ResultJobStatus == HangfireJobStatus.Completed)
+                            {
+                                if (job.AppName == CaesarJob.UMAP)
+                                {
+                                    if (hasPixPlot)
+                                    {
+                                        <a href="/Datasets/@DatasetId/DisplayModes/@displayModeId/Map?CustomLayoutFromJobId=@job.Id" target="_blank" class="ui basic small compact button">PixPlot</a>
+                                    }
+                                }
+                                else if (job.AppName == CaesarJob.HDBSCAN)
+                                {
+                                    if (hasPixPlot)
+                                    {
+                                        <a href="/Datasets/@DatasetId/DisplayModes/@displayModeId/Map?ClustersFromJobId=@job.Id" target="_blank" class="ui basic small compact button">PixPlot</a>                                        
+                                    }
+                                }
+                            }
+                            else if (job.CaesarJobState == "STARTED" || job.CaesarJobState == "RUNNING" || job.CaesarJobState == "PENDING")
+                            {
+                                <button class="ui basic small compact red button">Cancel</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="8">Total: @vm.Paging.RecordsCount</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        @if (vm.Paging.PagingButtons.Count > 1)
+        {
+            <div class="ui center aligned mini pagination menu">
+                <a class="icon item" href="/Datasets/@DatasetId?PageNumber=1&PageSize=@PageSize">
+                    <i class="angle double left icon"></i>
+                </a>
+                <a class="icon item" href="/Datasets/@DatasetId?PageNumber=@(PageNumber - 1)&PageSize=@PageSize">
+                    <i class="angle left icon"></i>
+                </a>
+                @foreach (var pagingButton in vm.Paging.PagingButtons)
+                {
+                    <a class="item @(pagingButton == (PageNumber ?? 1) ? "active" : "")" href="/Datasets/@DatasetId?PageNumber=@pagingButton&PageSize=@PageSize">@pagingButton</a>
+                }
+                <a class="icon item" href="/Datasets/@DatasetId?PageNumber=@(PageNumber + 1)&PageSize=@PageSize">
+                    <i class="angle right icon"></i>
+                </a>
+                <a class="icon item" href="/Datasets/@DatasetId?PageNumber=@vm.Paging.MaxPageNumber&PageSize=@PageSize">
+                    <i class="angle double right icon"></i>
+                </a>
+            </div>
+        }
+    }
+}
+
+<div class="ui mini modal" id="edit-dataset-modal">
+    <i class="close icon"></i>
+    <div class="content">
+        <EditForm Model="vm.EditDatasetModal" method="post" OnValidSubmit="EditDataset" class="ui form">
+            <DataAnnotationsValidator />
+            <div class="field">
+                <label>Name</label>
+                <InputText @bind-Value="vm.EditDatasetModal.Name" placeholder="Name" />
+            </div>
+            <div class="field">
+                <label>Description</label>
+                <InputTextArea @bind-Value="vm.EditDatasetModal.Description" placeholder="Description" style="height: 36px" />
+            </div>
+            <div class="field">
+                <label>Access</label>
+                <InputSelect @bind-Value="vm.EditDatasetModal.ShareType" class="ui search dropdown">
+                    <option selected value="1">Private</option>
+                    <option value="2">Shared as read only</option>
+                    <option value="3">Shared as read/write</option>
+                </InputSelect>
+            </div>
+            <button type="submit" class="ui small compact primary submit button">Save Changes</button>
+            <ValidationSummary />
+        </EditForm>
+    </div>
+</div>
+
+<div class="ui small modal" id="add-display-mode-modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Add Display Mode
+    </div>
+    <div class="content">
+        <EditForm Model="vm.AddDisplayModeModal" method="post" OnValidSubmit="AddDisplayMode" class="ui form">
+            <div class="ui two column grid">
+                <div class="row">
+                    <div class="column">
+                        <div class="field">
+                            <label>Name</label>
+                            <div class="ui left input">
+                                <InputText @bind-Value="vm.AddDisplayModeModal.Name" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Contrast</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.AddDisplayModeModal.Params.Contrast" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <InputCheckbox id="UsePil" @bind-Value="vm.AddDisplayModeModal.Params.UsePil" />
+                                <label for="UsePil">Use Pil (grayscale)</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <InputCheckbox id="SubtractBkg" @bind-Value="vm.AddDisplayModeModal.Params.SubtractBkg" />
+                                <label for="SubtractBkg">Subtract Bkg</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <InputCheckbox id="ClipData" @bind-Value="vm.AddDisplayModeModal.Params.ClipData" />
+                                <label for="ClipData">Clip Data</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label>Sigma Low</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.AddDisplayModeModal.Params.SigmaLow" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Sigma Up</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.AddDisplayModeModal.Params.SigmaUp" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <InputCheckbox id="ZscaleData" @bind-Value="vm.AddDisplayModeModal.Params.ZscaleData" />
+                                <label for="ZscaleData">ZScale Data</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <InputCheckbox id="ApplyMinMax" @bind-Value="vm.AddDisplayModeModal.Params.ApplyMinMax" />
+                                <label for="ApplyMinMax">Apply Minmax</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <button type="submit" class="ui small compact primary button">Add Display Mode</button>
+        </EditForm>
+    </div>
+</div>
+
+<div class="ui small modal" id="display-mode-params-modal">
+    <i class="close icon"></i>
+    <div class="header">
+        @vm.DisplayModeParamsModal.DisplayMode.Name
+    </div>
+    <div class="content">
+        <form class="ui form">
+            <div class="ui two column grid">
+                <div class="row">
+                    <div class="column">
+                        <div class="field">
+                            <label>Name</label>
+                            <div class="ui left input">
+                                <InputText @bind-Value="vm.DisplayModeParamsModal.DisplayMode.Name" disabled  />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Contrast</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.DisplayModeParamsModal.Params.Contrast" disabled  />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <InputCheckbox @bind-Value="vm.DisplayModeParamsModal.Params.UsePil" disabled />
+                                <label>Use Pil (grayscale)</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <InputCheckbox @bind-Value="vm.DisplayModeParamsModal.Params.SubtractBkg" disabled  />
+                                <label>Subtract Bkg</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <InputCheckbox @bind-Value="vm.DisplayModeParamsModal.Params.ClipData" disabled  />
+                                <label>Clip Data</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label>Sigma Low</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.DisplayModeParamsModal.Params.SigmaLow" disabled  />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Sigma Up</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.DisplayModeParamsModal.Params.SigmaUp" disabled  />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <InputCheckbox @bind-Value="vm.DisplayModeParamsModal.Params.ZscaleData" disabled  />
+                                <label>ZScale Data</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <InputCheckbox @bind-Value="vm.DisplayModeParamsModal.Params.ApplyMinMax" disabled  />
+                                <label>Apply Minmax</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="ui ignored info message">
+            @vm.DisplayModeParamsModal.DisplayMode.ImagesPath
+        </div>
+    </div>
+</div>
+
+<div class="ui small modal" id="generate-pixplot-modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Generate PixPlot
+    </div>
+    <div class="content">
+        <EditForm Model="vm.GeneratePixPlotModal" method="post" OnValidSubmit="GeneratePixPlot" class="ui form">
+            <div class="ui two column grid">
+                <div class="row">
+                    <div class="column">
+                        <div class="field">
+                            <label>The minimum number of images in a cluster</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.GeneratePixPlotModal.Params.MinClusterSize" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>The maximum number of clusters to return</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.GeneratePixPlotModal.Params.MaxClusters" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>The n_neighbors arguments for UMAP</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.GeneratePixPlotModal.Params.UmapNeighbors" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>The min_dist arguments for UMAP</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.GeneratePixPlotModal.Params.UmapMinDist" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>The n_components argument for UMAP</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.GeneratePixPlotModal.Params.UmapComponents" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>The metric argument for umap</label>
+                            <div class="ui left input">
+                                <InputText @bind-Value="vm.GeneratePixPlotModal.Params.UmapMetric" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label>The size of atlas cells in px</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.GeneratePixPlotModal.Params.AtlasCellSize" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Float 0:1 that determines sparsity of jittered distributions (lower means more sparse)</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.GeneratePixPlotModal.Params.PointgridFill" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Min size of cropped images</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.GeneratePixPlotModal.Params.ImageMinSize" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Seed for random processes</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.GeneratePixPlotModal.Params.Seed" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Number of clusters to use when clustering with kmeans</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.GeneratePixPlotModal.Params.KmeansClusters" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <button type="submit" class="ui small compact primary button">Generate PixPlot</button>
+        </EditForm>
+    </div>
+</div>
+
+<div class="ui small modal" id="pixplot-params-modal">
+    <i class="close icon"></i>
+    <div class="header">
+        PixPlot Params
+    </div>
+    <div class="content">
+        <form class="ui form">
+            <div class="ui two column grid">
+                <div class="row">
+                    <div class="column">
+                        <div class="field">
+                            <label>The minimum number of images in a cluster</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.PixPlotParamsModal.Params.MinClusterSize" disabled />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>The maximum number of clusters to return</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.PixPlotParamsModal.Params.MaxClusters" disabled />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>The n_neighbors arguments for UMAP</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.PixPlotParamsModal.Params.UmapNeighbors" disabled />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>The min_dist arguments for UMAP</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.PixPlotParamsModal.Params.UmapMinDist" disabled />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>The n_components argument for UMAP</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.PixPlotParamsModal.Params.UmapComponents" disabled />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>The metric argument for umap</label>
+                            <div class="ui left input">
+                                <InputText @bind-Value="vm.PixPlotParamsModal.Params.UmapMetric" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label>The size of atlas cells in px</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.PixPlotParamsModal.Params.AtlasCellSize" disabled />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Float 0:1 that determines sparsity of jittered distributions (lower means more sparse)</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.PixPlotParamsModal.Params.PointgridFill" disabled />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Min size of cropped images</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.PixPlotParamsModal.Params.ImageMinSize" disabled />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Seed for random processes</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.PixPlotParamsModal.Params.Seed" disabled />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Number of clusters to use when clustering with kmeans</label>
+                            <div class="ui left input">
+                                <InputNumber @bind-Value="vm.PixPlotParamsModal.Params.KmeansClusters" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showEditDatasetModal() { $('#edit-dataset-modal').modal('show'); }
+    function hideEditDatasetModal() { $('#edit-dataset-modal').modal('hide'); }
+
+    function showAddDisplayModeModal() { $('#add-display-mode-modal').modal('show'); }
+    function hideAddDisplayModeModal() { $('#add-display-mode-modal').modal('hide'); }
+
+    function showGeneratePixPlotModal() { $('#generate-pixplot-modal').modal('show'); }
+    function hideGeneratePixPlotModal() { $('#generate-pixplot-modal').modal('hide'); }
+
+    function showDisplayModeParamsModal() { $('#display-mode-params-modal').modal('show'); }
+    function showPixPlotParamsModal() { $('#pixplot-params-modal').modal('show'); }
+</script>

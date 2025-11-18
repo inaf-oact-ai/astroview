@@ -1,0 +1,46 @@
+﻿@page "/NotedFiles"
+@inherits AppPageBase
+<PageTitle>Noted Files</PageTitle>
+@* <Breadcrumbs PageName="NotedFiles"></Breadcrumbs> *@
+
+<div class="page-header">
+    <span class="page-header-title">Noted Files</span>
+    <button class="ui small compact basic red button" @onclick="RemoveAll">Remove All</button>
+</div>
+
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Path</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var file in AppVm.Files)
+        {
+            <tr>
+                <td class="collapsing">
+                    @if (file.IsImage)
+                    {
+                        <img src="@file.Url" style="max-width:100px" />
+                    }
+                    else
+                    {
+                        <i class="ui file icon"></i>
+                    }
+                </td>
+                <td class="collapsing">
+                    @file.Name
+                </td>
+                <td><div style="word-break: break-all">@file.Path</div></td>
+                <td>
+                    <button class="ui compact basic icon button" @onclick="() => Remove(file)">
+                        <i class="icon trash"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

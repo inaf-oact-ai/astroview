@@ -1,0 +1,116 @@
+﻿@using System.Text.RegularExpressions
+
+@inject AuthenticationStateProvider asp
+@inject NavigationManager nav
+@inject IDbContextFactory<AppDbContext> dbf
+
+<!DOCTYPE html>
+<html lang="en">
+
+@if (isAuthenticated && !isPixPlot)
+{
+    <head>
+        <base href="/" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="site.css" rel="stylesheet" />
+        <link rel="icon" type="image/png" href="favicon.png" />
+
+        @if (isDarkMode)
+        {
+            <link id="theme" rel="stylesheet" href="semantic/semantic_dark.css" />
+            <link href="site_dark.css" rel="stylesheet" />
+        }
+        else
+        {
+            <link id="theme" rel="stylesheet" href="semantic/semantic.css" />
+        }
+
+        <HeadOutlet @rendermode="new InteractiveServerRenderMode(prerender: false)" />
+    </head>
+    <body>
+        <Routes @rendermode="new InteractiveServerRenderMode(prerender: false)" />
+
+        <script src="jquery/jquery-3.7.1.min.js"></script>
+        <script src="semantic/semantic.min.js"></script>
+        <script src="_framework/blazor.web.js"></script>
+    </body>
+}
+else if (isAuthenticated && isPixPlot)
+{
+    <head>
+        <base href="/" />
+        <meta charset="utf-8" />
+        <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+        <meta http-equiv='ScreenOrientation' content='autoRotate:disabled'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet'>
+        <link rel='stylesheet' type='text/css' href='pixplot/css/no-ui-slider.css'>
+        <link rel='stylesheet' type='text/css' href='pixplot/css/style.css'>
+        <link rel="icon" type="image/png" href="favicon.png" />
+        <HeadOutlet />
+    </head>
+
+    <body>
+        <Routes />
+
+        <script src='pixplot/vendor/dist/three.min.js'></script>
+        <script src='pixplot/vendor/dist/lodash.min.js'></script>
+        <script src='pixplot/js/object-assign-polyfill.js'></script>
+        <script src='pixplot/vendor/dist/gsap.min.js'></script>
+        <script src='pixplot/vendor/src/trackball-controls.js'></script>
+        <script src='pixplot/vendor/src/fly-controls.js'></script>
+        <script src='pixplot/vendor/dist/stats.min.js'></script>
+        <script src='pixplot/vendor/dist/gunzip.min.js'></script>
+        <script src='pixplot/vendor/dist/papaparse.min.js'></script>
+        <script src='pixplot/vendor/dist/no-ui-slider.min.js'></script>
+        <script src='pixplot/vendor/dist/jszip.min.js'></script>
+        <script src='pixplot/vendor/dist/d3.min.js'></script>
+        <script src='pixplot/js/tsne.js'></script>
+    </body>
+}
+else
+{
+    <head>
+        <base href="/" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="site.css" rel="stylesheet" />
+        <link id="theme" rel="stylesheet" href="semantic/semantic.css" />
+        <link rel="icon" type="image/png" href="favicon.png" />
+        <HeadOutlet />
+    </head>
+
+    <body>
+        <Routes />
+
+        <script src="jquery/jquery-3.7.1.min.js"></script>
+        <script src="semantic/semantic.min.js"></script>
+        <script src="_framework/blazor.web.js"></script>
+    </body>
+}
+
+</html>
+
+@code {
+    private bool isDarkMode;
+    private bool isPixPlot;
+    private bool isAuthenticated;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await asp.GetAuthenticationStateAsync();
+        if (state.User.Identity?.IsAuthenticated == false)
+            return;
+
+        isAuthenticated = true;
+
+        var darkModeClaim = state.User.Claims.FirstOrDefault(r => r.Type == "dark-mode");
+        if (darkModeClaim != null)
+        {
+            isDarkMode = darkModeClaim.Value == "true";
+        }
+
+        var uri = nav.Uri.ToString();
+        isPixPlot = Web.Pages.Datasets.PixPlotPage.IsCurrentPage(uri);
+    }
+}

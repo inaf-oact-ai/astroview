@@ -1,0 +1,33 @@
+﻿@page "/"
+@inherits AppPageBase
+
+<div class="page-header">
+    <span class="page-header-title">Home</span>
+</div>
+
+<div class="ui three statistics">
+    <div class="statistic">
+        <div class="value">
+            <i class="database icon"></i> @vm.DatasetsCount
+        </div>
+        <div class="label">
+            Datasets
+        </div>
+    </div>
+    <div class="statistic">
+        <div class="value">
+            <i class="image icon"></i> @vm.ImagesCount
+        </div>
+        <div class="label">
+            Images
+        </div>
+    </div>
+    <div class="statistic">
+        <div class="value">
+            <i class="tags icon"></i> @vm.LabelsCount
+        </div>
+        <div class="label">
+            Labels
+        </div>
+    </div>
+</div>

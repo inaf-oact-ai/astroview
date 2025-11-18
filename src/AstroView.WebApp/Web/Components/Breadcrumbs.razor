@@ -1,0 +1,20 @@
+﻿<div class="ui breadcrumb">
+    @for (var i = 0; i < Sequence.Count; i++)
+    {
+        var item = Sequence[i];
+
+        if (Sequence.Count == i + 1)
+        {
+            <a class="active section" href="@GetUrl(item)">@GetTitle(item)</a>
+        }
+        else
+        {
+            <a class="section" href="@GetUrl(item)">@GetTitle(item)</a>
+        }
+
+        if (Sequence.Count > i + 1)
+        {
+            <div class="divider"> <i class="small chevron right icon"></i> </div>
+        }
+    }
+</div>

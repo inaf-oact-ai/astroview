@@ -1,0 +1,204 @@
+﻿@page "/Datasets/{DatasetId:int}/Images/{ImageId:int}"
+@inherits AppPageBase
+<PageTitle>@vm.DatasetName - Images</PageTitle>
+<Breadcrumbs PageName="DatasetImage" DatasetName="@vm.DatasetName" DatasetId="@DatasetId" ImageName="@vm.Image.Name" ImageId="@ImageId"></Breadcrumbs>
+
+<div class="page-header">
+    <span class="page-header-title">@vm.Image.Name</span>
+</div>
+
+@foreach(var render in vm.Renders)
+{
+    <span>@render.DisplayMode.Name:</span>
+    <br />
+    <img src="@render.ImageUrl" />
+    <br />
+}
+
+<div style="margin-top: 10px; margin-bottom: 10px">
+@if (vm.LabelEditModeEnabled)
+{
+    <select id="labelsDropdown" class="ui fluid search dropdown" multiple="">
+        @foreach(var label in vm.Labels)
+        {
+            <option value="@label.Id">@label.Name</option>
+        }
+    </select>
+    <div style="margin-top: 10px">
+        <button class="ui primary button" @onclick="SaveLabels">Save</button>
+        <button class="ui button" @onclick="DisableLabelEditMode">Cancel</button>
+    </div>
+} 
+else 
+{
+    @foreach (var imageLabel in vm.Image.Labels)
+    {
+        <a class="ui @imageLabel.Label.Color tag label small" style="margin-top: 2px; margin-bottom: 2px">@imageLabel.Label.Name
+            &nbsp;
+            @if (imageLabel.Value > 0) 
+            {
+                var probability = (imageLabel.Value * 100).ToString("0.00") + "%";
+                <span>(@probability)</span>
+            }
+        </a>
+    }
+    <span>&nbsp;</span>
+    <i class="ui edit outline icon pointer" @onclick="EnableLabelEditMode"></i>
+}
+</div>
+
+<script>
+    function initLabelsDropdown(activeLabelIds) {
+        $('#labelsDropdown').dropdown('set selected', activeLabelIds);
+    }
+
+    function getLabelsDropdownValues() {
+        return $('#labelsDropdown').dropdown('get values');
+    }    
+    
+    function destroyLabelsDropdown() {
+        $('#labelsDropdown').dropdown('destroy');
+        $('.selection.multiple').remove();
+    }
+</script>
+
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Name</td>
+            <td><span>@vm.Image.Name</span>
+                <button class="ui compact basic icon button" @onclick="() => DownloadImage()">
+                    <i class="icon download"></i>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>Telescope</td>
+            <td>@vm.Image.Telescope</td>
+        </tr>
+        <tr>
+            <td>Survey</td>
+            <td>@vm.Image.Survey</td>
+        </tr>
+        <tr>
+            <td>Project</td>
+            <td>@vm.Image.Project</td>
+        </tr>
+        <tr>
+            <td>Nx <span data-tooltip="Width of the image in pixels"><i class="question circle outline icon"></i></span></td>
+            <td>@vm.Image.Nx</td>
+        </tr>
+        <tr>
+            <td>Ny <span data-tooltip="Height of the image in pixels"><i class="question circle outline icon"></i></span></td>
+            <td>@vm.Image.Ny</td>
+        </tr>
+        <tr>
+            <td>Dx <span data-tooltip="The size of the pixel along x in arcseconds"><i class="question circle outline icon"></i></span></td>
+            <td>@vm.Image.Dx</td>
+        </tr>
+        <tr>
+            <td>Dy <span data-tooltip="The size of the y-long pixel in arcseconds"><i class="question circle outline icon"></i></span></td>
+            <td>@vm.Image.Dy</td>
+        </tr>
+        <tr>
+            <td>Ra (FK5) <span data-tooltip="Right-Ascension of the center of the image in equatorial coordinates FK5"><i class="question circle outline icon"></i></span></td>
+            <td>@vm.Image.Ra</td>
+        </tr>
+        <tr>
+            <td>Dec (FK5) <span data-tooltip="Declination of the center of the image in equatorial coordinates FK5"><i class="question circle outline icon"></i></span></td>
+            <td>@vm.Image.Dec</td>
+        </tr>
+        <tr>
+            <td>L <span data-tooltip="Galactic longitude of the center of the image in galactic coordinates"><i class="question circle outline icon"></i></span></td>
+            <td>@vm.Image.L</td>
+        </tr>
+        <tr>
+            <td>B <span data-tooltip="Galactic latitude of the center of the image in galactic coordinates"><i class="question circle outline icon"></i></span></td>
+            <td>@vm.Image.B</td>
+        </tr>
+        <tr>
+            <td>N Sources <span data-tooltip="Number of compact sources extracted with an automatic algorithm (very approximate)"><i class="question circle outline icon"></i></span></td>
+            <td>@vm.Image.Nsources</td>
+        </tr>
+        <tr>
+            <td>Bkg <span data-tooltip="Background level of the original image (FITS) in units of Jy/beam"><i class="question circle outline icon"></i></span></td>
+            <td>@vm.Image.Bkg</td>
+        </tr>
+        <tr>
+            <td>Rms <span data-tooltip="Standard deviation (noise RMS) of the background of the original image (FITS) in units of Jy/beam"><i class="question circle outline icon"></i></span></td>
+            <td>@vm.Image.Rms</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="ui form">
+    <div class="field">
+        <label>Path</label>
+        <InputText @bind-Value="vm.Image.Path" readonly></InputText>
+    </div>
+    <div class="field">
+        <label>
+            Features
+            @if (vm.FeaturesCount > 0)
+            {
+                <div class="ui green horizontal label" style="vertical-align: top">@vm.FeaturesCount</div> 
+            }
+        </label>
+        <InputTextArea @bind-Value="vm.Image.Features" readonly></InputTextArea>
+    </div>
+</div>
+
+<div class="ui mini modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Add Label
+    </div>
+    <div class="content">
+        <form class="ui form">
+          <h4 class="ui dividing header">Shipping Information</h4>
+          <div class="field">
+            <label>Name</label>
+            <div class="two fields">
+              <div class="field">
+                <input type="text" name="shipping[first-name]" placeholder="First Name">
+              </div>
+            </div>
+          </div>
+          <div class="two fields">
+            <div class="field">
+              <label>Country</label>
+              <div class="ui fluid search selection dropdown">
+                <input type="hidden" name="country">
+                <i class="dropdown icon"></i>
+                <div class="default text">Select Country</div>
+                <div class="menu">
+                  <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
+                  <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
+                  <div class="item" data-value="al"><i class="al flag"></i>Albania</div>
+                  <div class="item" data-value="dz"><i class="dz flag"></i>Algeria</div>
+                  <div class="item" data-value="as"><i class="as flag"></i>American Samoa</div>
+                  <div class="item" data-value="ad"><i class="ad flag"></i>Andorra</div>
+                  <div class="item" data-value="ao"><i class="ao flag"></i>Angola</div>
+                  <div class="item" data-value="ai"><i class="ai flag"></i>Anguilla</div>
+                  <div class="item" data-value="ag"><i class="ag flag"></i>Antigua</div>
+                  <div class="item" data-value="ar"><i class="ar flag"></i>Argentina</div>
+                  <div class="item" data-value="am"><i class="am flag"></i>Armenia</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui button" tabindex="0">Submit Order</div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showModal() { $('.ui.modal').modal('show'); }
+    function hideModal() { $('.ui.modal').modal('hide'); }
+</script>

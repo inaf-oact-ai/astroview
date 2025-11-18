@@ -1,0 +1,122 @@
+﻿@page "/Datasets/{DatasetId:int}/Hdbscan/{CaesarJobId:int}/Clusters"
+@inherits AppPageBase
+<PageTitle>@vm.DatasetName - Clusters</PageTitle>
+<Breadcrumbs PageName="DatasetClusters" DatasetName="@vm.DatasetName" DatasetId="@DatasetId" CaesarJobId="@CaesarJobId"></Breadcrumbs>
+
+<div class="page-header">
+    <span class="page-header-title">@vm.DatasetName - Clusters</span>
+    <button class="ui small compact primary button" @onclick="@ShowCreateDatasetModal">Create Dataset</button>
+</div>
+
+<div class="flex-space-between">
+    <div></div>
+    <div>
+        Index:
+        <div class="ui left icon input" style="max-width: 120px">
+            <i class="greater than equal icon"></i>
+            <input type="number" @bind-value="vm.MinIndex" min="0" step="1">
+        </div>
+        <div class="ui left icon input" style="max-width: 120px">
+            <i class="less than equal icon"></i>
+            <input type="number" @bind-value="vm.MaxIndex" min="0" step="1">
+        </div>
+        Images:
+        <div class="ui left icon input" style="max-width: 120px">
+            <i class="greater than equal icon"></i>
+            <input type="number" @bind-value="vm.MinImages" min="0" step="1">
+        </div>
+        <div class="ui left icon input" style="max-width: 120px">
+            <i class="less than equal icon"></i>
+            <input type="number" @bind-value="vm.MaxImages" min="0" step="1">
+        </div>
+        <button class="ui small compact primary button" @onclick="() => DisplayClusters()" style="margin-left: 5px">Search</button>
+    </div>
+</div>
+
+<br />
+
+<script>
+    function onAfterRender() {
+        $('#edit-labels-dropdown').dropdown();
+    }
+</script>
+
+<div class="ui grid">
+    <div class="row">
+        <div class="eight wide column" style="margin: auto">
+        </div>
+        <div class="eight wide column">
+            <div style="display: flex;text-wrap-mode: nowrap;align-items: center;">
+                <InputSelect id="edit-labels-dropdown" class="ui fluid dropdown" @bind-Value="vm.SelectedLabelId" disabled="@vm.LabelingInProgress">
+                    <option value="">Select Label</option>
+                    @foreach(var label in vm.Labels)
+                    {
+                        <option value="@label.Id">@label.Name</option>   
+                    }
+                </InputSelect>
+                @if (vm.LabelingInProgress)
+                {
+                    <div style="margin-left: 5px">Please wait (@vm.LabelingPercent.ToString("0.00")%)</div>
+                }
+                else
+                {
+                    <button class="ui small compact primary button" @onclick="ApplyLabel" style="margin-left: 5px">Apply Label</button>
+                    <button class="ui small compact basic red button" @onclick="RemoveLabel" style="margin-right: 0px">Remove Label</button>   
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Name</th>
+            <th>Index</th>
+            <th>Images</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cluster in vm.Clusters)
+        {
+            <tr>
+                <td class="collapsing">
+                    <div class="ui checkbox">
+                        <InputCheckbox @bind-value="cluster.IsChecked" />
+                        <label></label>
+                    </div>
+                </td>
+                <td class="collapsing">
+                    <a href="/Datasets/@DatasetId/Hdbscan/@CaesarJobId/Clusters/@cluster.Id">
+                        <img src="@cluster.ImageUrl" style="max-width:100px" />
+                    </a>
+                </td>
+                <td><a href="/Datasets/@DatasetId/Hdbscan/@CaesarJobId/Clusters/@cluster.Id">@cluster.Name</a></td>
+                <td>@cluster.Index</td>
+                <td>@cluster.ImagesCount</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="ui mini modal">
+    <i class="close icon"></i>
+    <div class="content">
+        <form class="ui form">
+            <div class="field">
+                <label>Dataset Name</label>
+                <div class="ui left input">
+                    <InputText @bind-Value="vm.CreateDatasetModel.DatasetName" />
+                </div>
+            </div>
+            <a class="ui small compact primary button" @onclick="CreateDataset">Create Dataset</a>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showModal() { $('.ui.modal').modal('show'); }
+    function hideModal() { $('.ui.modal').modal('hide'); }
+</script>

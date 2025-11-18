@@ -1,0 +1,115 @@
+﻿@inherits LayoutComponentBase
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<div class="ui container main-container">
+    <div class="ui secondary menu">
+        <div class="header item"><a href="/">AstroView</a></div>
+        <NavLink class="item" href="/Datasets">Datasets</NavLink>
+        <NavLink class="item" href="/FileExplorer/Library">Library</NavLink>
+        <NavLink class="item" href="/FileExplorer/Storage">Storage</NavLink>
+        <NavLink class="item" href="/Labels">Labels</NavLink>
+        <AuthorizeView Roles="@Defaults.Roles.Admin">
+            <NavLink class="item" href="/Users">Users</NavLink>
+        </AuthorizeView>
+        <a class="item" href="/Jobs/jobs/processing" target="_blank">Jobs</a>
+        <NavLink class="item" href="/Help">Help</NavLink>
+        <div class="right menu">
+            @if (vm.Files.Count > 0)
+            {
+                <a class="item" href="/NotedFiles"><i class="ui photo video icon"></i> @vm.Files.Count</a>
+            }
+            @if (vm.CurrentDatasetId != 0)
+            {
+                <a class="item" href="/Datasets/@vm.CurrentDatasetId">
+                    <i class="ui database icon"></i>
+                    @vm.CurrentDatasetName
+                </a>
+            }
+            <a class="item" href="/Profile"
+               data-tooltip="Profile"
+               data-position="bottom center"
+               data-variation="small"><i class="cog icon menu-icon"></i></a>
+            <a class="item" href="/Logout"
+               data-tooltip="Logout"
+               data-position="bottom center"
+               data-variation="small"><i class="sign out icon menu-icon"></i></a>
+        </div>
+    </div>
+    <main>
+        <CascadingValue Name="AppVm" Value="vm">
+            @Body
+        </CascadingValue>
+    </main>
+    <Footer />
+</div>
+
+<script>
+    function showToast(message) {
+        $.toast({
+            position: 'bottom right',
+            displayTime: 3000,
+            closeIcon: true,
+            class: 'toast-class',
+            classActions: '',
+            title: '',
+            message: message,
+            actions: []
+        });
+    }
+
+    function showErrorToast(message) {
+        $.toast({
+            position: 'bottom attached',
+            displayTime: 0,
+            closeIcon: true,
+            class: 'red',
+            classActions: '',
+            title: 'Error',
+            message: message,
+        });
+    }
+
+    function showWarningToast(message) {
+        $.toast({
+            position: 'bottom right',
+            displayTime: 3000,
+            closeIcon: true,
+            class: 'orange',
+            classActions: '',
+            title: 'Warning',
+            message: message,
+        });
+    }
+
+    function showBackgroundJobToast(taskName, taskUrl) {
+        $.toast({
+            position: 'bottom right',
+            displayTime: 7000,
+            closeIcon: true,
+            class: 'toast-class',
+            classActions: 'basic right',
+            title: 'Background Job',
+            message: taskName,
+            actions: [
+                {
+                  class: 'small compact basic',
+                  text: 'View',
+                  click: function () { location.href = taskUrl; }
+                }
+            ]
+        });
+    }
+</script>
+<script>
+    window.downloadFileFromStream = async (fileName, contentStreamReference) => {
+      const arrayBuffer = await contentStreamReference.arrayBuffer();
+      const blob = new Blob([arrayBuffer]);
+      const url = URL.createObjectURL(blob);
+      const anchorElement = document.createElement('a');
+      anchorElement.href = url;
+      anchorElement.download = fileName ?? '';
+      anchorElement.click();
+      anchorElement.remove();
+      URL.revokeObjectURL(url);
+    }
+</script>

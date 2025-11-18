@@ -1,0 +1,142 @@
+﻿@page "/Datasets/{DatasetId:int}/Hdbscan"
+@inherits AppPageBase
+<PageTitle>HDBSCAN</PageTitle>
+<Breadcrumbs PageName="DatasetFunctionHdbscan" DatasetName="@vm.DatasetName" DatasetId="@DatasetId"></Breadcrumbs>
+
+<div class="page-header">
+    <span class="page-header-title">HDBSCAN</span>
+    <DisplayModeSelector DatasetId="DatasetId" OnDisplayModeChanged="OnDisplayModeChanged" />
+</div>
+
+@if (vm.ExecuteDisabled)
+{
+    <div class="ui negative message">
+        <p>Caesar Dataset must be generated for Display Mode: @vm.SelectedDisplayMode?.Name</p>
+    </div>
+}
+
+<div class="ui four column grid">
+    <div class="row">
+        <div class="column">
+            <h4 class="ui dividing header">Input</h4>
+            <div class="ui form">
+                <div class="field">
+                    <label>Data column ids to be selected from input data, separated by commas</label>
+                    <InputText @bind-Value="vm.Parameters.SelCols"></InputText>
+                </div>
+                <div class="field">
+                    <label>Dictionary key name to be read in input datalist</label>
+                    <InputText disabled @bind-Value="vm.Parameters.DatalistKey"></InputText>
+                </div>
+                <div class="field">
+                    <label>Dimensionality reduction method {pca}</label>
+                    <InputText @bind-Value="vm.Parameters.ReduceDimMethod"></InputText>
+                </div>
+            </div>
+            <h4 class="ui dividing header">Pre-processing</h4>
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="NormalizeMinMax" @bind-Value="vm.Parameters.NormalizeMinMax"></InputCheckbox>
+                        <label for="NormalizeMinMax">Normalize each channel in range</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="ReduceDim" @bind-Value="vm.Parameters.ReduceDim"></InputCheckbox>
+                        <label for="ReduceDim">Reduce feature data dimensionality before applying the clustering</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <h4 class="ui dividing header">Processing</h4>
+            <div class="ui form">
+                <div class="field">
+                    <label>A distance threshold. Clusters below this value will be merged</label>
+                    <InputNumber @bind-Value="vm.Parameters.ClusterSelectionEpsilon"></InputNumber>
+                </div>
+                <div class="field">
+                    <label>Minimum cluster size for HDBSCAN clustering</label>
+                    <InputNumber @bind-Value="vm.Parameters.MinClusterSize"></InputNumber>
+                </div>
+                <div class="field">
+                    <label>Minimum cluster sample parameter for HDBSCAN clustering. Less than 0 means setting it to None, which means equal to min_cluster_size</label>
+                    <InputNumber @bind-Value="vm.Parameters.MinSamples"></InputNumber>
+                </div>
+                <div class="field">
+                    <label>Number of PCA components to be used (-1=retain all cumulating a variance above threshold)</label>
+                    <InputNumber @bind-Value="vm.Parameters.PcaNcomps"></InputNumber>
+                </div>
+                <div class="field">
+                    <label>Cumulative variance threshold used to retain PCA components</label>
+                    <InputNumber @bind-Value="vm.Parameters.PcaVarthr"></InputNumber>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <h4 class="ui dividing header">Run</h4>
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="noLogRedir" @bind-Value="vm.Parameters.NoLogRedir"></InputCheckbox>
+                        <label for="noLogRedir">Do not redirect logs to output file in script</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <h4 class="ui dividing header">Output</h4>
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="NoSaveAsci" disabled @bind-Value="vm.Parameters.NoSaveAsci"></InputCheckbox>
+                        <label for="NoSaveAsci">Do not save output in ascii format</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="NoSaveJson" disabled @bind-Value="vm.Parameters.NoSaveJson"></InputCheckbox>
+                        <label for="NoSaveJson">Do not save output in json format</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="NoSaveModel" disabled @bind-Value="vm.Parameters.NoSaveModel"></InputCheckbox>
+                        <label for="NoSaveModel">Do not save model</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="NoSaveFeatures" disabled @bind-Value="vm.Parameters.NoSaveFeatures"></InputCheckbox>
+                        <label for="NoSaveFeatures">Do not save features</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Name of output file in ascii format</label>
+                    <InputText disabled @bind-Value="vm.Parameters.Outfile"></InputText>
+                </div>
+                <div class="field">
+                    <label>Name of output file in json format</label>
+                    <InputText disabled @bind-Value="vm.Parameters.OutfileJson"></InputText>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="four wide column">
+            <button class="ui compact primary button @(vm.ShowExecuteLoader ? "loading" : "")" disabled=@vm.ExecuteDisabled @onclick="Execute">Execute</button>
+            <button class="ui compact button @(vm.ShowLoadDescriptionLoader ? "loading" : "")" @onclick="LoadDescription">Load Description</button>
+        </div>
+    </div>
+    @if (vm.Description.Length > 0)
+    {
+        <div class="row">
+            <div class="sixteen wide column">
+                <div class="ui message">
+                    <pre>@((MarkupString)vm.Description)</pre>
+                </div>
+            </div>
+        </div>
+    }
+</div>

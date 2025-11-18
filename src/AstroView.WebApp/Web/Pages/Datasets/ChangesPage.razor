@@ -1,0 +1,101 @@
+﻿@page "/Datasets/{DatasetId:int}/Changes"
+@inherits AppPageBase
+<PageTitle>Changes</PageTitle>
+<Breadcrumbs PageName="DatasetChanges" DatasetId="@DatasetId" DatasetName="@vm.DatasetName"></Breadcrumbs>
+
+<div class="page-header">
+    <span class="page-header-title">Changes</span>
+    <div>
+        Sort:
+        <div class="ui small basic toggle buttons">
+            <div class="ui button @(vm.SortDesc == true ? "active" : "")" @onclick="() => SetSortDesc(true)">Desc</div>
+            <div class="ui button @(vm.SortDesc == false ? "active" : "")" @onclick="() => SetSortDesc(false)">Asc</div>
+        </div>
+        <button class="ui small compact basic icon button" @onclick="() => DisplayChanges()">
+            <i class="icon sync alternate"></i>
+        </button>
+    </div>
+</div>
+
+<script>
+    function onAfterRender() {
+        $('.ui.dropdown').dropdown();
+    }
+</script>
+
+<div class="flex-space-between">
+    <div></div>
+    <div>
+        User:
+        <InputSelect class="ui clearable dropdown" @bind-Value="vm.SelectedUserId">
+            <option value="">All</option>
+            @foreach(var user in vm.Users)
+            {
+                <option value="@user.Id">@user.DisplayName</option>   
+            }
+        </InputSelect>
+        Date:
+        <div class="ui left icon input" style="min-width: 220px">
+            <i class="greater than equal icon"></i>
+            <input type="date" @bind-value="vm.MinDate">
+        </div>
+        <div class="ui left icon input" style="min-width: 220px">
+            <i class="less than equal icon"></i>
+            <input type="date" @bind-value="vm.MaxDate">
+        </div>
+        <button class="ui small compact primary button" @onclick="() => DisplayChanges()" style="margin-left: 5px">Search</button>
+    </div>
+</div>
+
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>User</th>
+            <th>Action</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var change in vm.Changes)
+        {
+            <tr>
+                <td>@change.Date</td>
+                <td><span data-tooltip="@change.User.Email">@change.User.DisplayName</span></td>
+                <td>@change.Type</td>
+                <td>@change.Data</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">Total: @vm.Paging.RecordsCount</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div style="text-align: right">
+    <div class="ui action mini input">
+        <InputNumber @bind-Value="PageNumber" step="1" min="1"></InputNumber>
+        <button class="ui mini button" @onclick="GoToPage">Go</button>
+    </div>
+
+    <div class="ui mini pagination menu">
+        <a class="icon item" href="/Datasets/@DatasetId/Changes?PageNumber=1&PageSize=@PageSize">
+            <i class="angle double left icon"></i>
+        </a>
+        <a class="icon item" href="/Datasets/@DatasetId/Changes?PageNumber=@(PageNumber - 1)&PageSize=@PageSize">
+            <i class="angle left icon"></i>
+        </a>
+        @foreach (var pagingButton in vm.Paging.PagingButtons)
+        {
+            <a class="item @(pagingButton == (PageNumber ?? 1) ? "active" : "")" href="/Datasets/@DatasetId/Changes?PageNumber=@pagingButton&PageSize=@PageSize">@pagingButton</a>
+        }
+        <a class="icon item" href="/Datasets/@DatasetId/Changes?PageNumber=@(PageNumber + 1)&PageSize=@PageSize">
+            <i class="angle right icon"></i>
+        </a>
+        <a class="icon item" href="/Datasets/@DatasetId/Changes?PageNumber=@vm.Paging.MaxPageNumber&PageSize=@PageSize">
+            <i class="angle double right icon"></i>
+        </a>
+    </div>
+</div>

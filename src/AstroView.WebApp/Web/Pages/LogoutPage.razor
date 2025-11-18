@@ -1,0 +1,11 @@
+﻿@page "/Logout"
+@layout EmptyLayout
+@inherits AppPageBase
+
+<script>
+    $(() => {
+        $.post('/api/logout', () => {
+            window.location = '/';
+        });
+    });
+</script>

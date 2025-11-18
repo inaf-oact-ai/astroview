@@ -1,0 +1,118 @@
+﻿@page "/Datasets"
+@inherits AppPageBase
+<PageTitle>Datasets</PageTitle>
+@* <Breadcrumbs PageName="Datasets"></Breadcrumbs> *@
+
+<div class="page-header">
+    <span class="page-header-title">Datasets</span>
+</div>
+
+<div class="flex-space-between">
+    <div>
+        <div class="ui small input">
+            <input type="text" @bind-value="vm.SearchTerm" placeholder="Search...">
+        </div>
+        <button class="ui small compact primary button" @onclick="DisplayDatasets">Search</button>
+    </div>
+    <div>
+        <button class="ui small compact primary button" @onclick="() => ShowCreateDatasetModal()"><i class="plus icon"></i>Create Dataset</button>
+        <button class="ui small compact basic icon button" @onclick="DisplayDatasets">
+            <i class="icon sync alternate"></i>
+        </button>
+    </div>
+</div>
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Images</th>
+            <th>Features</th>
+            <th>Created By</th>
+            <th>Created Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dataset in vm.Datasets)
+        {
+            <tr>
+                <td class="collapsing">
+                    <i class="@((dataset.Option?.IsFavorite ?? false) ? "star" : "star outline") icon star-icon"
+                       @onclick="() => ToggleFavorite(dataset.Id)"></i>
+                </td>
+                <td class="collapsing">
+                    <a href="/Datasets/@dataset.Id">@dataset.Name</a>&nbsp;
+                    @if (dataset.Id == AppVm.CurrentDatasetId)
+                    {
+                        <div class="ui green horizontal label">Selected</div>
+                    }
+                </td>
+                <td>@dataset.ImagesCount</td>
+                <td>
+                    @if (dataset.FeaturesCount > 0)
+                    {
+                        <div class="ui green horizontal label" style="vertical-align: top">@dataset.FeaturesCount</div> 
+                    }
+                </td>
+                <td>@dataset.CreatedBy</td>
+                <td>@dataset.CreatedDate</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6">Total: @vm.Paging.RecordsCount</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="ui center aligned mini pagination menu">
+    <a class="icon item" href="/Datasets?PageNumber=1&PageSize=@PageSize">
+        <i class="angle double left icon"></i>
+    </a>
+    <a class="icon item" href="/Datasets?PageNumber=@(PageNumber - 1)&PageSize=@PageSize">
+        <i class="angle left icon"></i>
+    </a>
+    @foreach (var pagingButton in vm.Paging.PagingButtons)
+    {
+        <a class="item @(pagingButton == (PageNumber ?? 1) ? "active" : "")" href="/Datasets?PageNumber=@pagingButton&PageSize=@PageSize">@pagingButton</a>
+    }
+    <a class="icon item" href="/Datasets?PageNumber=@(PageNumber + 1)&PageSize=@PageSize">
+        <i class="angle right icon"></i>
+    </a>
+    <a class="icon item" href="/Datasets?PageNumber=@vm.Paging.MaxPageNumber&PageSize=@PageSize">
+        <i class="angle double right icon"></i>
+    </a>
+</div>
+
+<div class="ui mini modal" id="create-dataset-modal">
+    <i class="close icon"></i>
+    <div class="content">
+        <EditForm Model="vm.CreateDatasetModal" method="post" OnValidSubmit="CreateDataset" class="ui form">
+            <DataAnnotationsValidator />
+            <div class="field">
+                <label>Name</label>
+                <InputText @bind-Value="vm.CreateDatasetModal.Name" placeholder="Name" />
+            </div>
+            <div class="field">
+                <label>Description</label>
+                <InputTextArea @bind-Value="vm.CreateDatasetModal.Description" placeholder="Description" style="height: 36px" />
+            </div>
+            <div class="field">
+                <label>Access</label>
+                <InputSelect @bind-Value="vm.CreateDatasetModal.ShareType" class="ui search dropdown">
+                    <option selected value="1">Private</option>
+                    <option value="2">Shared as read only</option>
+                    <option value="3">Shared as read/write</option>
+                </InputSelect>
+            </div>
+            <button type="submit" class="ui small compact primary button">Create Dataset</button>
+            <ValidationSummary />
+        </EditForm>
+    </div>
+</div>
+
+<script>
+    function showCreateDatasetModal() { $('#create-dataset-modal').modal('show'); }
+    function hideCreateDatasetModal() { $('#create-dataset-modal').modal('hide'); }
+</script>

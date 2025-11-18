@@ -1,0 +1,114 @@
+﻿@page "/Datasets/{DatasetId:int}/Jobs"
+@inherits AppPageBase
+<PageTitle>Jobs</PageTitle>
+<Breadcrumbs PageName="DatasetJobs" DatasetId="@DatasetId" DatasetName="@vm.DatasetName"></Breadcrumbs>
+
+<div class="page-header">
+    <span class="page-header-title">Jobs</span>
+    <div>
+        Sort:
+        <div class="ui small basic toggle buttons">
+            <div class="ui button @(vm.SortDesc == true ? "active" : "")" @onclick="() => SetSortDesc(true)">Desc</div>
+            <div class="ui button @(vm.SortDesc == false ? "active" : "")" @onclick="() => SetSortDesc(false)">Asc</div>
+        </div>
+        <button class="ui small compact basic icon button" @onclick="() => DisplayJobs()">
+            <i class="icon sync alternate"></i>
+        </button>
+    </div>
+</div>
+
+<script>
+    function onAfterRender() {
+    $('.ui.dropdown').dropdown();
+    }
+</script>
+
+<div class="flex-space-between">
+    <div></div>
+    <div>
+        User:
+        <InputSelect class="ui clearable dropdown" @bind-Value="vm.SelectedUserId">
+            <option value="">All</option>
+            @foreach(var user in vm.Users)
+            {
+                <option value="@user.Id">@user.DisplayName</option>   
+            }
+        </InputSelect>
+        Date:
+        <div class="ui left icon input" style="min-width: 220px">
+            <i class="greater than equal icon"></i>
+            <input type="date" @bind-value="vm.MinDate">
+        </div>
+        <div class="ui left icon input" style="min-width: 220px">
+            <i class="less than equal icon"></i>
+            <input type="date" @bind-value="vm.MaxDate">
+        </div>
+        <button class="ui small compact primary button" @onclick="DisplayJobs" style="margin-left: 5px">Search</button>
+    </div>
+</div>
+
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Status</th>
+            <th>User</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var job in vm.Jobs)
+        {
+            <tr>
+                <td>@job.Type</td>
+                <td>
+                    <a href="/Jobs/jobs/details/@job.JobId">
+                        <HangfireJobStatusLabel Status="job.JobStatus" />
+                    </a>
+                </td>
+                <td>@job.User.DisplayName</td>
+                <td>@job.Date</td>
+                <td>
+                    @if (job.JobStatus != HangfireJobStatus.Completed)
+                    {
+                        <button class="ui small compact basic icon button" @onclick="() => MarkAsCompleted(job.Id)">
+                            Mark as Completed
+                        </button>
+                    }
+                </td>
+                </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5">Total: @vm.Paging.RecordsCount</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div style="text-align: right">
+    <div class="ui action mini input">
+        <InputNumber @bind-Value="PageNumber" step="1" min="1"></InputNumber>
+        <button class="ui mini button" @onclick="GoToPage">Go</button>
+    </div>
+
+    <div class="ui mini pagination menu">
+        <a class="icon item" href="/Datasets/@DatasetId/Jobs?PageNumber=1&PageSize=@PageSize">
+            <i class="angle double left icon"></i>
+        </a>
+        <a class="icon item" href="/Datasets/@DatasetId/Jobs?PageNumber=@(PageNumber - 1)&PageSize=@PageSize">
+            <i class="angle left icon"></i>
+        </a>
+        @foreach (var pagingButton in vm.Paging.PagingButtons)
+        {
+            <a class="item @(pagingButton == (PageNumber ?? 1) ? "active" : "")" href="/Datasets/@DatasetId/Jobs?PageNumber=@pagingButton&PageSize=@PageSize">@pagingButton</a>
+        }
+        <a class="icon item" href="/Datasets/@DatasetId/Jobs?PageNumber=@(PageNumber + 1)&PageSize=@PageSize">
+            <i class="angle right icon"></i>
+        </a>
+        <a class="icon item" href="/Datasets/@DatasetId/Jobs?PageNumber=@vm.Paging.MaxPageNumber&PageSize=@PageSize">
+            <i class="angle double right icon"></i>
+        </a>
+    </div>
+</div>

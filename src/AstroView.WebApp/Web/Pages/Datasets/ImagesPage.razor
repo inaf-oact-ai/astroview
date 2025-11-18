@@ -1,0 +1,273 @@
+﻿@page "/Datasets/{DatasetId:int}/Images"
+@inherits AppPageBase
+<PageTitle>@vm.DatasetName - Images</PageTitle>
+<Breadcrumbs PageName="DatasetImages" DatasetName="@vm.DatasetName" DatasetId="@DatasetId"></Breadcrumbs>
+
+<div class="page-header">
+    <span class="page-header-title">@vm.DatasetName - Images</span>
+    <div>
+        <button class="ui icon button @(vm.Filter.IsApplied() ? "primary" : "basic")" @onclick="ShowFilterModal">
+            <i class="filter icon"></i>
+        </button>
+        <div id="settings-dropdown" class="ui dropdown icon top left pointing basic button">
+            <i class="download icon"></i>
+            <div class="menu">
+                <div class="item" @onclick="ExportToCsv">Export search results to CSV</div>
+                <div class="item" @onclick="ExportToCaesarDataset">Export search results to JSON (Caesar Dataset)</div>
+                <div class="item"><a href="/Datasets/@DatasetId/Exports">View Export History</a></div>
+            </div>
+        </div>
+        Display Mode:&nbsp;
+        <div class="ui small basic toggle buttons">
+            @foreach (var mode in vm.DisplayModes)
+            {
+                <div class="ui button @(mode.Id == DisplayModeId ? "active" : "")" @onclick="() => SetDisplayMode(mode.Id)">@mode.Name</div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    function onAfterRender() {
+    $('#settings-dropdown').dropdown();
+    $('#edit-labels-dropdown').dropdown();
+    }
+</script>
+
+<div class="ui modal" id="filter-modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Image Filter
+    </div>
+    <div class="content">
+        <div class="ui form">
+            <div class="four fields">
+                <div class="field">
+                    <label data-tooltip="Use an asterisk (*) at the beginning, end, or both to perform a wildcard search">Name</label>
+                    <InputText @bind-Value="vm.Filter.Name" />
+                </div>
+                <div class="field">
+                    <label>Telescope</label>
+                    <InputText @bind-Value="vm.Filter.Telescope" />
+                </div>
+                <div class="field">
+                    <label>Survey</label>
+                    <InputText @bind-Value="vm.Filter.Survey" />
+                </div>
+                <div class="field">
+                    <label>Project</label>
+                    <InputText @bind-Value="vm.Filter.Project" />
+                </div>
+            </div>
+            <div class="four fields">
+                <div class="field">
+                    <label>Ra (FK5)</label>
+                    <InputNumber @bind-Value="vm.Filter.Ra" />
+                </div>
+                <div class="field">
+                    <label>Dec (FK5)</label>
+                    <InputNumber @bind-Value="vm.Filter.Dec" />
+                </div>
+                <div class="field">
+                    <label>Galactic Longitude</label>
+                    <InputNumber @bind-Value="vm.Filter.GLon" />
+                </div>
+                <div class="field">
+                    <label>Galactic Latitude</label>
+                    <InputNumber @bind-Value="vm.Filter.Glat" />
+                </div>
+            </div>
+            <div class="fields">
+                <div class="twelve wide field">
+                    <label>Labels</label>
+                    <select id="labelsDropdown" class="ui fluid search dropdown" multiple="">
+                        @foreach (var label in vm.Labels)
+                        {
+                            <option value="@label.Id">@label.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="four wide field">
+                    <label></label>
+                    <div style="display: flex">
+                        <button class="ui fluid primary button" @onclick="ApplyFilter">Apply</button>
+                        <button class="ui button" @onclick="ClearFilter">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showFilterModal() { $('#filter-modal').modal('show'); }
+    function hideFilterModal() { $('#filter-modal').modal('hide'); }
+
+    function initLabelsDropdown(activeLabelIds) {
+    $('#labelsDropdown').dropdown('clear');
+    $('#labelsDropdown').dropdown('set selected', activeLabelIds);
+    }
+
+    function getLabelsDropdownValues() {
+    return $('#labelsDropdown').dropdown('get values');
+    }
+
+    function destroyLabelsDropdown() {
+    $('#labelsDropdown').dropdown('destroy');
+    $('.selection.multiple').remove();
+    }
+</script>
+
+@if (vm.Filter.IsApplied())
+{
+    <div class="ui message">
+        <div class="header">Filter Applied</div>
+        <p>@vm.Filter.GetDescription(vm.Labels)</p>
+    </div>
+}
+
+<div class="ui grid">
+    <div class="row">
+        <div class="eight wide column" style="margin: auto">
+            Images found: @vm.Paging.RecordsCount
+        </div>
+        <div class="eight wide column">
+            <div style="display: flex;text-wrap-mode: nowrap;align-items: center;">
+                <InputSelect id="edit-labels-dropdown" class="ui fluid dropdown" @bind-Value="vm.SelectedLabelId" disabled="@vm.LabelingInProgress">
+                    <option value="">Select Label</option>
+                    @foreach (var label in vm.Labels)
+                    {
+                        <option value="@label.Id">@label.Name</option>
+                    }
+                </InputSelect>
+                @if (vm.LabelingInProgress)
+                {
+                    <div style="margin-left: 5px">Please wait (@vm.LabelingPercent.ToString("0.00")%)</div>
+                }
+                else
+                {
+                    <button class="ui small compact primary button" @onclick="ApplyLabel" 
+                        style="margin-left: 5px"
+                        data-tooltip="Apply label to the search results">Apply Label</button>
+                    <button class="ui small compact basic red button" @onclick="RemoveLabel" 
+                        style="margin-right: 0px"
+                        data-tooltip="Remove label from the search results">Remove Label</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (DatasetId == AppVm.CurrentDatasetId && !AppVm.CurrentDatasetIsLocked)
+{
+    <div style="display: flex; flex-direction: row; justify-content: flex-end; margin-top: 5px;">
+        <a href="/FileExplorer/Library" class="ui small compact primary button"><i class="icon plus"></i>Add Images</a>
+        <button class="ui small compact basic red button" @onclick="RemoveSelectedImages">Delete Selected</button>
+        <button class="ui small compact basic red button" @onclick="RemoveSearchResultImages">Delete Search Results</button>
+        <button class="ui small compact basic red button" @onclick="RemoveAllImages">Delete All</button>
+    </div>
+}
+
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th>
+                @if (IsLoading)
+                {
+                    <div class="ui active small inline loader"></div>
+                }
+            </th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Labels</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var image in vm.Images)
+        {
+            <tr>
+                <td class="collapsing">
+                    @if (!AppVm.CurrentDatasetIsLocked)
+                    {
+                        <div class="ui checkbox">
+                            <InputCheckbox Value="image.IsChecked"
+                            ValueExpression="() => image.IsChecked"
+                            ValueChanged="(state) => OnImageChecked(state, image)">
+                            </InputCheckbox>
+                            <label></label>
+                        </div>
+                    }
+                </td>
+                <td class="collapsing">
+                    @if (image.IsFits)
+                    {
+                        <span class="ui horizontal label">FITS</span>
+                    }
+                    else
+                    {
+                        <a href="/Datasets/@DatasetId/Images/@image.Id"><img src="@image.Url" style="max-width:100px" /></a>   
+                    }
+                </td>
+                <td class="collapsing">
+                    <a href="/Datasets/@DatasetId/Images/@image.Id">@image.ImageName</a>
+                </td>
+                <td>
+                    @foreach (var imageLabel in image.Labels)
+                    {
+                        var label = vm.LabelsById[imageLabel.LabelId];
+
+                        <a class="ui @label.Color tag label small" style="margin-top: 2px; margin-bottom: 2px">
+                            @label.Name
+                            &nbsp;
+                            @if (imageLabel.Value > 0)
+                            {
+                                var probability = (imageLabel.Value * 100).ToString("0.00") + "%";
+                                <span>(@probability)</span>
+                            }
+                        </a>
+                    }
+                </td>
+                <td class="collapsing">
+                    <button class="ui compact basic icon button" @onclick="() => DownloadImage(image.ImageName)">
+                        <i class="icon download"></i>
+                    </button>
+                    <button class="ui compact basic icon button" @onclick="() => AddFileToNotes(image.ImageName)">
+                        <i class="icon photo video"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5">Total: @vm.Paging.RecordsCount</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div style="text-align: right">
+    <div class="ui action mini input">
+        <InputNumber @bind-Value="PageNumber" step="1" min="1"></InputNumber>
+        <button class="ui mini button" @onclick="GoToPage">Go</button>
+    </div>
+    
+    <div class="ui mini pagination menu">
+        <a class="icon item" href="/Datasets/@DatasetId/Images?PageNumber=1&PageSize=@PageSize&DisplayModeId=@DisplayModeId">
+            <i class="angle double left icon"></i>
+        </a>
+        <a class="icon item" href="/Datasets/@DatasetId/Images?PageNumber=@(PageNumber - 1)&PageSize=@PageSize&DisplayModeId=@DisplayModeId">
+            <i class="angle left icon"></i>
+        </a>
+        @foreach (var pagingButton in vm.Paging.PagingButtons)
+        {
+            <a class="item @(pagingButton == (PageNumber ?? 1) ? "active" : "")" href="/Datasets/@DatasetId/Images?PageNumber=@pagingButton&PageSize=@PageSize&DisplayModeId=@DisplayModeId">@pagingButton</a>
+        }
+        <a class="icon item" href="/Datasets/@DatasetId/Images?PageNumber=@(PageNumber + 1)&PageSize=@PageSize&DisplayModeId=@DisplayModeId">
+            <i class="angle right icon"></i>
+        </a>
+        <a class="icon item" href="/Datasets/@DatasetId/Images?PageNumber=@vm.Paging.MaxPageNumber&PageSize=@PageSize&DisplayModeId=@DisplayModeId">
+            <i class="angle double right icon"></i>
+        </a>
+    </div>
+</div>

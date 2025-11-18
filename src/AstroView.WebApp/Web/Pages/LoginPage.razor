@@ -1,0 +1,51 @@
+﻿@page "/Login"
+@layout EmptyLayout
+@inherits AppPageBase
+
+<PageTitle>Log in</PageTitle>
+
+<div class="ui container main-container">
+    <div class="login-page">
+        <div class="ui middle aligned center aligned grid login-container">
+            <div class="column login-column">
+                <h2 class="ui header">AstroView</h2>
+                <EditForm Model="Input" method="post" OnValidSubmit="LoginUser" FormName="login" class="ui form">
+                    <DataAnnotationsValidator />
+                    <div class="ui segment left aligned ">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="mail icon"></i>
+                                <InputText @bind-Value="Input.Email" autocomplete="username" placeholder="Email" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <InputText type="password" @bind-Value="Input.Password" autocomplete="current-password" placeholder="Password" />
+                            </div>
+                        </div>
+                        <button type="submit" class="ui fluid submit primary button">Login</button>
+                        @if(errorMessage != null)
+                        {
+                            <div class="ui negative message">
+                                <p>@errorMessage</p>
+                            </div>
+                        }
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+        <Footer />
+    </div>
+</div>
+
+<script>
+    function showToast(text) {
+    $.toast({
+    position: 'bottom right',
+    class: 'error',
+    title: taskName,
+    message: text,
+    });
+    }
+</script>

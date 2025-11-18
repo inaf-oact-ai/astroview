@@ -1,0 +1,146 @@
+﻿@page "/Users"
+@inherits AppPageBase
+<PageTitle>Users</PageTitle>
+
+<div class="page-header">
+    <span class="page-header-title">Users</span>
+    <div>
+        <button class="ui small compact primary button" @onclick="() => ShowAddUserModal()"><i class="plus icon"></i>Add User</button>
+        <button class="ui small compact basic icon button" @onclick="DisplayUsers">
+            <i class="icon sync alternate"></i>
+        </button>
+    </div>
+</div>
+
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Display Name</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in vm.Users)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.DisplayName</td>
+                <td>
+                    @if (user.LockoutEnd == null)
+                    {
+                        <div class="ui green horizontal label">Active</div>
+                    }
+                    else
+                    {
+                        <div class="ui red horizontal label">Inactive</div>
+                    }
+                </td>
+                <td class="collapsing">
+                    <button class="ui small compact basic button" @onclick="() => ShowChangePasswordModal(user.Id)">Change Password</button>
+                </td>
+                <td class="collapsing">
+                    @if (user.Email == Defaults.ADMIN_EMAIL)
+                    {
+                    }
+                    else
+                    {
+                        if (user.LockoutEnd == null)
+                        {
+                            <button class="ui fluid small compact basic red button" @onclick="() => BlockUser(user.Id)"><i class="ban icon"></i>Deactivate</button>
+                        }
+                        else
+                        {
+                            <button class="ui fluid small compact basic button" @onclick="() => UnblockUser(user.Id)"><i class="check circle outline icon"></i>Activate</button>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5">Total: @vm.Paging.RecordsCount</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div style="text-align: right">
+    <div class="ui action mini input">
+        <InputNumber @bind-Value="PageNumber" step="1" min="1"></InputNumber>
+        <button class="ui mini button" @onclick="GoToPage">Go</button>
+    </div>
+
+    <div class="ui mini pagination menu">
+        <a class="icon item" href="/Users?PageNumber=1&PageSize=@PageSize">
+            <i class="angle double left icon"></i>
+        </a>
+        <a class="icon item" href="/Users?PageNumber=@(PageNumber - 1)&PageSize=@PageSize">
+            <i class="angle left icon"></i>
+        </a>
+        @foreach (var pagingButton in vm.Paging.PagingButtons)
+        {
+            <a class="item @(pagingButton == (PageNumber ?? 1) ? "active" : "")" href="/Users?PageNumber=@pagingButton&PageSize=@PageSize">@pagingButton</a>
+        }
+        <a class="icon item" href="/Users?PageNumber=@(PageNumber + 1)&PageSize=@PageSize">
+            <i class="angle right icon"></i>
+        </a>
+        <a class="icon item" href="/Users?PageNumber=@vm.Paging.MaxPageNumber&PageSize=@PageSize">
+            <i class="angle double right icon"></i>
+        </a>
+    </div>
+</div>
+
+<div class="ui mini modal change-password-modal">
+    <i class="close icon"></i>
+    <div class="content">
+        <EditForm Model="vm.ChangePasswordModal" method="post" OnValidSubmit="ChangePassword" class="ui form">
+            <DataAnnotationsValidator />
+            <div class="field">
+                <label>Email</label>
+                <InputText @bind-Value="vm.ChangePasswordModal.Email" disabled />
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <InputText @bind-Value="vm.ChangePasswordModal.Password" type="password" placeholder="Password" />
+            </div>
+            <button type="submit" class="ui small compact primary button">Change Password</button>
+            <ValidationSummary />
+            <div>@vm.ChangePasswordModal.ErrorMessage</div>
+        </EditForm>
+    </div>
+</div>
+
+<div class="ui mini modal add-user-modal">
+    <i class="close icon"></i>
+    <div class="content">
+        <EditForm Model="vm.AddUserModal" method="post" OnValidSubmit="AddUser" class="ui form">
+            <DataAnnotationsValidator />
+            <div class="field">
+                <label>Email</label>
+                <InputText @bind-Value="vm.AddUserModal.Email" autocomplete="username" />
+            </div>
+            <div class="field">
+                <label>Display Name</label>
+                <InputText @bind-Value="vm.AddUserModal.DisplayName" />
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <InputText type="password" @bind-Value="vm.AddUserModal.Password" autocomplete="current-password" />
+            </div>
+            <button type="submit" class="ui small compact primary button">Add User</button>
+            <ValidationSummary />
+            <div>@vm.AddUserModal.ErrorMessage</div>
+        </EditForm>
+    </div>
+</div>
+
+<script>
+    function showChangePasswordModal() { $('.change-password-modal').modal('show'); }
+    function hideChangePasswordModal() { $('.change-password-modal').modal('hide'); }
+
+    function showAddUserModal() { $('.add-user-modal').modal('show'); }
+    function hideAddUserModal() { $('.add-user-modal').modal('hide'); }
+</script>

@@ -1,0 +1,128 @@
+﻿@page "/Datasets/{DatasetId:int}/Umap"
+@inherits AppPageBase
+<PageTitle>UMAP</PageTitle>
+<Breadcrumbs PageName="DatasetFunctionUmap" DatasetName="@vm.DatasetName" DatasetId="@DatasetId"></Breadcrumbs>
+
+<div class="page-header">
+    <span class="page-header-title">UMAP</span>
+    <DisplayModeSelector DatasetId="DatasetId" OnDisplayModeChanged="OnDisplayModeChanged" />
+</div>
+
+@if (vm.ExecuteDisabled)
+{
+    <div class="ui negative message">
+        <p>Caesar Dataset must be generated for Display Mode: @vm.SelectedDisplayMode?.Name</p>
+    </div>
+}
+
+<div class="ui grid">
+    <div class="row">
+        <div class="four wide column">
+            <h4 class="ui dividing header">Input</h4>
+            <div class="ui form">
+                <div class="field">
+                    <label>Data column ids to be selected from input data, separated by commas</label>
+                    <InputText @bind-Value="vm.Parameters.SelCols"></InputText>
+                </div>
+                <div class="field">
+                    <label>Dictionary key name to be read in input datalist</label>
+                    <InputText disabled @bind-Value="vm.Parameters.DatalistKey"></InputText>
+                </div>
+            </div>
+            <h4 class="ui dividing header">Pre-processing</h4>
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="NormalizeMinMax" @bind-Value="vm.Parameters.NormalizeMinMax"></InputCheckbox>
+                        <label for="NormalizeMinMax">Normalize each channel in range</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="four wide column">
+            <h4 class="ui dividing header">Processing</h4>
+            <div class="ui form">
+                <div class="field">
+                    <label>Encoded data dim in UMAP</label>
+                    <InputNumber @bind-Value="vm.Parameters.Nfeats"></InputNumber>
+                </div>
+                <div class="field">
+                    <label>Min dist UMAP parameter</label>
+                    <InputNumber @bind-Value="vm.Parameters.MinDist"></InputNumber>
+                </div>
+                <div class="field">
+                    <label>N neighbors UMAP parameter</label>
+                    <InputNumber @bind-Value="vm.Parameters.Neighbours"></InputNumber>
+                </div>
+            </div>
+        </div>
+        <div class="four wide column">
+            <h4 class="ui dividing header">Run</h4>
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="runSupervised" @bind-Value="vm.Parameters.RunSupervised"></InputCheckbox>
+                        <label for="runSupervised">Run UMAP also on labelled data alone (if available)</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="noLogRedir" @bind-Value="vm.Parameters.NoLogRedir"></InputCheckbox>
+                        <label for="noLogRedir">Do not redirect logs to output file in script</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="four wide column">
+            <h4 class="ui dividing header">Output</h4>
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="NoSaveAsci" disabled @bind-Value="vm.Parameters.NoSaveAsci"></InputCheckbox>
+                        <label for="NoSaveAsci">Do not save output in ascii format</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="NoSaveJson" disabled @bind-Value="vm.Parameters.NoSaveJson"></InputCheckbox>
+                        <label for="NoSaveJson">Do not save output in json format</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="NoSaveModel" disabled @bind-Value="vm.Parameters.NoSaveModel"></InputCheckbox>
+                        <label for="NoSaveModel">Do not save model</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Name of UMAP encoded data output file for supervised run in ascii format</label>
+                    <InputText disabled @bind-Value="vm.Parameters.OutfileSup"></InputText>
+                </div>
+                <div class="field">
+                    <label>Name of UMAP encoded data output file in ascii format</label>
+                    <InputText disabled @bind-Value="vm.Parameters.OutfileUnsup"></InputText>
+                </div>
+                <div class="field">
+                    <label>Name of UMAP encoded data output file in json format</label>
+                    <InputText disabled @bind-Value="vm.Parameters.OutfileUnsupJson"></InputText>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="four wide column">
+            <button class="ui compact primary button @(vm.ShowExecuteLoader ? "loading" : "")" disabled=@vm.ExecuteDisabled @onclick="Execute">Execute</button>
+            <button class="ui compact button @(vm.ShowLoadDescriptionLoader ? "loading" : "")" @onclick="LoadDescription">Load Description</button>
+        </div>
+    </div>
+    @if (vm.Description.Length > 0)
+    {
+        <div class="row">
+            <div class="sixteen wide column">
+                <div class="ui message">
+                    <pre>@((MarkupString)vm.Description)</pre>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,226 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-AstroView.WebApp-9ae778cc-4410-46fb-9392-193afd48720b</UserSecretsId>
+	<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\pixplot\css\no-ui-slider.css" />
+    <Content Remove="wwwroot\pixplot\css\style.css" />
+    <Content Remove="wwwroot\pixplot\images\date-layout.png" />
+    <Content Remove="wwwroot\pixplot\images\dhlab-logo.svg" />
+    <Content Remove="wwwroot\pixplot\images\heightmap.jpg" />
+    <Content Remove="wwwroot\pixplot\images\icons\az-layout.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\caret-icon.png" />
+    <Content Remove="wwwroot\pixplot\images\icons\categorical-layout.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\chevron.png" />
+    <Content Remove="wwwroot\pixplot\images\icons\custom-layout.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\date-layout.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\download-icon.png" />
+    <Content Remove="wwwroot\pixplot\images\icons\eye-icon.png" />
+    <Content Remove="wwwroot\pixplot\images\icons\gear-icon.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\geographic-layout.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\grid-layout.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\lasso.png" />
+    <Content Remove="wwwroot\pixplot\images\icons\pan.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\pinch-icon.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\pose-icon.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\pose-layout.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\refresh.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\save.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\scatter-layout.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\search-icon.svg" />
+    <Content Remove="wwwroot\pixplot\images\icons\select.svg" />
+    <Content Remove="wwwroot\pixplot\images\preview.png" />
+    <Content Remove="wwwroot\pixplot\js\object-assign-polyfill.js" />
+    <Content Remove="wwwroot\pixplot\js\tsne.js" />
+    <Content Remove="wwwroot\pixplot\vendor\dist\d3.min.js" />
+    <Content Remove="wwwroot\pixplot\vendor\dist\gsap.min.js" />
+    <Content Remove="wwwroot\pixplot\vendor\dist\gunzip.min.js" />
+    <Content Remove="wwwroot\pixplot\vendor\dist\jszip.min.js" />
+    <Content Remove="wwwroot\pixplot\vendor\dist\lodash.min.js" />
+    <Content Remove="wwwroot\pixplot\vendor\dist\no-ui-slider.min.js" />
+    <Content Remove="wwwroot\pixplot\vendor\dist\papaparse.min.js" />
+    <Content Remove="wwwroot\pixplot\vendor\dist\stats.min.js" />
+    <Content Remove="wwwroot\pixplot\vendor\dist\three.min.js" />
+    <Content Remove="wwwroot\pixplot\vendor\src\fly-controls.js" />
+    <Content Remove="wwwroot\pixplot\vendor\src\jszip.js" />
+    <Content Remove="wwwroot\pixplot\vendor\src\stats.js" />
+    <Content Remove="wwwroot\pixplot\vendor\src\trackball-controls.js" />
+    <Content Remove="wwwroot\pixplot\vendor\src\tweenlite.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.8.18" />
+    <PackageReference Include="Hangfire.Console" Version="1.4.3" />
+    <PackageReference Include="Hangfire.MySqlStorage" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
+    <PackageReference Include="System.Text.Json" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\pixplot\css\no-ui-slider.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\css\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\date-layout.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\dhlab-logo.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\heightmap.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\az-layout.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\caret-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\categorical-layout.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\chevron.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\custom-layout.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\date-layout.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\download-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\eye-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\gear-icon.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\geographic-layout.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\grid-layout.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\lasso.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\pan.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\pinch-icon.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\pose-icon.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\pose-layout.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\refresh.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\save.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\scatter-layout.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\search-icon.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\icons\select.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\images\preview.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\js\object-assign-polyfill.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\js\tsne.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\dist\d3.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\dist\gsap.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\dist\gunzip.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\dist\jszip.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\dist\lodash.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\dist\no-ui-slider.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\dist\papaparse.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\dist\stats.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\dist\three.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\src\fly-controls.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\src\jszip.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\src\stats.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\src\trackball-controls.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\pixplot\vendor\src\tweenlite.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\pixplot\json\flat-continents.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Scripts\fits2png.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\pixplot.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\pixplot.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="App\Integrations\CaesarApi\Mocks\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,65 @@
+﻿@page "/Datasets/{DatasetId:int}/IndividualSimilars/{CaesarJobId:int}"
+@inherits AppPageBase
+<PageTitle>@vm.DatasetName - Individual Similars</PageTitle>
+<Breadcrumbs PageName="DatasetIndividualSimilars" DatasetName="@vm.DatasetName" DatasetId="@DatasetId" CaesarJobId="@CaesarJobId"></Breadcrumbs>
+
+<div class="page-header">
+    <span class="page-header-title">@vm.DatasetName - Individual Similars</span>
+</div>
+
+<img src="@vm.FileUrl" />
+
+<div class="flex-space-between" style="margin-bottom: 5px">
+    <div></div>
+    <div>
+        Sort:
+        <div class="ui small basic toggle buttons">
+            <div class="ui button @(vm.SortDesc == true ? "active" : "")" @onclick="() => SetSortDesc(true)">Desc</div>
+            <div class="ui button @(vm.SortDesc == false ? "active" : "")" @onclick="() => SetSortDesc(false)">Asc</div>
+        </div>
+    </div>
+</div>
+
+<div class="flex-space-between">
+    <div></div>
+    <div>
+        Score:
+        <div class="ui left icon input" style="min-width: 220px">
+            <i class="greater than equal icon"></i>
+            <input type="number" @bind-value="vm.MinScore" min="0" max="1" step="0.1">
+        </div>
+        <div class="ui left icon input" style="min-width: 220px">
+            <i class="less than equal icon"></i>
+            <input type="number" @bind-value="vm.MaxScore" min="0" step="0.1">
+        </div>
+        <button class="ui small compact primary button" @onclick="() => DisplaySimilars()" style="margin-left: 5px">Search</button>
+    </div>
+</div>
+
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var similar in vm.Children)
+        {
+            <tr>
+                <td class="collapsing">
+                    <a href="/Datasets/@DatasetId/Images/@similar.ImageId">
+                        <img src="@similar.ImageUrl" style="max-width:50px" /><span>&nbsp;</span>
+                    </a>
+                </td>
+                <td>
+                    <a href="/Datasets/@DatasetId/Images/@similar.ImageId">@similar.ImageName</a>
+                </td>
+                <td>
+                    @similar.Score
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,93 @@
+﻿@page "/Labels"
+@inherits AppPageBase
+<PageTitle>Labels</PageTitle>
+@* <Breadcrumbs PageName="Labels"></Breadcrumbs> *@
+
+<div class="page-header">
+    <span class="page-header-title">Labels</span>
+    <div>
+        <button class="ui small compact primary button" @onclick="() => ShowEditForm(0)"><i class="plus icon"></i>Add Label</button>
+        <button class="ui small compact basic black button" @onclick="RandomizeColors">Randomize Colors</button>
+        <button class="ui small compact basic icon button" @onclick="DisplayLabels">
+            <i class="icon sync alternate"></i>
+        </button>
+    </div>
+</div>
+
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Color</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var label in vm.Labels)
+        {
+            <tr>
+                <td><a @onclick="async () => await ShowEditForm(label.Id)" style="cursor:pointer">@label.Name</a></td>
+                <td><a @onclick="async () => await ShowEditForm(label.Id)" class="ui @label.Color tag label small black-tag">@label.Name</a></td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">Total: @vm.Paging.RecordsCount</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div style="text-align: right">
+    <div class="ui action mini input">
+        <InputNumber @bind-Value="PageNumber" step="1" min="1"></InputNumber>
+        <button class="ui mini button" @onclick="GoToPage">Go</button>
+    </div>
+
+    <div class="ui mini pagination menu">
+        <a class="icon item" href="/Labels?PageNumber=1&PageSize=@PageSize">
+            <i class="angle double left icon"></i>
+        </a>
+        <a class="icon item" href="/Labels?PageNumber=@(PageNumber - 1)&PageSize=@PageSize">
+            <i class="angle left icon"></i>
+        </a>
+        @foreach (var pagingButton in vm.Paging.PagingButtons)
+        {
+            <a class="item @(pagingButton == (PageNumber ?? 1) ? "active" : "")" href="/Labels?PageNumber=@pagingButton&PageSize=@PageSize">@pagingButton</a>
+        }
+        <a class="icon item" href="/Labels?PageNumber=@(PageNumber + 1)&PageSize=@PageSize">
+            <i class="angle right icon"></i>
+        </a>
+        <a class="icon item" href="/Labels?PageNumber=@vm.Paging.MaxPageNumber&PageSize=@PageSize">
+            <i class="angle double right icon"></i>
+        </a>
+    </div>
+</div>
+
+<div class="ui mini modal">
+    <i class="close icon"></i>
+    <div class="content">
+        <EditForm Model="vm.EditLabelModel" method="post" OnValidSubmit="SaveLabel" class="ui form">
+            <DataAnnotationsValidator />
+            <div class="field">
+                <div class="ui left input">
+                    <InputText @bind-Value="vm.EditLabelModel.Name" placeholder="Name" />
+                </div>
+            </div>
+            <div class="field">
+                <InputSelect @bind-Value="vm.EditLabelModel.Color" class="ui search dropdown">
+                    @foreach(var color in Defaults.Colors)
+                    {
+                        <option value="@color.ToLower()">@color</option>
+                    }
+                </InputSelect>
+            </div>
+            <button type="submit" class="ui small compact primary button">Save Label</button>
+            <ValidationSummary />
+        </EditForm>
+    </div>
+</div>
+
+<script>
+    function showModal() { $('.ui.modal').modal('show'); }
+    function hideModal() { $('.ui.modal').modal('hide'); }
+</script>

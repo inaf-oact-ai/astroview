@@ -1,0 +1,164 @@
+{
+    "anomaly-thr": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": 0.9,
+        "description": "Threshold in anomaly score above which observation is set as outlier (default=0.9)",
+        "enum": false,
+        "mandatory": false,
+        "max": 1.0,
+        "min": 0.0,
+        "subcategory": "",
+        "type": "float"
+    },
+    "contamination": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": -1.0,
+        "description": "Fraction of outliers expected [0,0.5]. If <=0 will set it to auto (default=-1)",
+        "enum": false,
+        "mandatory": false,
+        "max": 1.0,
+        "min": -1.0,
+        "subcategory": "",
+        "type": "float"
+    },
+    "datalist-key": {
+        "advanced": 0,
+        "category": "INPUT",
+        "default": "data",
+        "description": "Dictionary key name to be read in input datalist (default=data)",
+        "enum": false,
+        "mandatory": false,
+        "max": "",
+        "min": "",
+        "subcategory": "",
+        "type": "str"
+    },
+    "max-features": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": 1,
+        "description": "Number of max features used in each forest tree (default=1)",
+        "enum": false,
+        "mandatory": false,
+        "max": 10000,
+        "min": 1,
+        "subcategory": "",
+        "type": "int"
+    },
+    "max-samples": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": -1.0,
+        "description": "Number of max samples used in each forest tree. -1 means auto options, e.g. 256 entries, otherwise it is the fraction of total available entries (default=-1)",
+        "enum": false,
+        "mandatory": false,
+        "max": 1.0,
+        "min": -1.0,
+        "subcategory": "",
+        "type": "float"
+    },
+    "nestimators": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": 100,
+        "description": "Number of forest trees to fit (default=100)",
+        "enum": false,
+        "mandatory": false,
+        "max": 10000,
+        "min": 1,
+        "subcategory": "",
+        "type": "int"
+    },
+    "no-logredir": {
+        "advanced": 0,
+        "category": "RUN",
+        "description": "Do not redirect logs to output file in script",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "normalize_minmax": {
+        "advanced": 0,
+        "category": "PREPROCESSING",
+        "description": "Normalize each channel in range",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "no-save-ascii": {
+        "advanced": 0,
+        "category": "OUTPUT",
+        "description": "Do not save output in ascii format",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "no-save-features": {
+        "advanced": 0,
+        "category": "OUTPUT",
+        "description": "Do not save features in output files",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "no-save-json": {
+        "advanced": 0,
+        "category": "OUTPUT",
+        "description": "Do not save output in json format",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "no-save-model": {
+        "advanced": 0,
+        "category": "OUTPUT",
+        "description": "Do not save model",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "outfile": {
+        "advanced": 0,
+        "category": "OUTPUT",
+        "default": "outlier_data",
+        "description": "Name of output file in ascii format (default=outlier_data)",
+        "enum": false,
+        "mandatory": false,
+        "max": "",
+        "min": "",
+        "subcategory": "",
+        "type": "str"
+    },
+    "outfile-json": {
+        "advanced": 0,
+        "category": "OUTPUT",
+        "default": "outlier_data.json",
+        "description": "Name of output file in json format (default=outlier_data.json)",
+        "enum": false,
+        "mandatory": false,
+        "max": "",
+        "min": "",
+        "subcategory": "",
+        "type": "str"
+    },
+    "selcols": {
+        "advanced": 0,
+        "category": "INPUT",
+        "default": "",
+        "description": "Data column ids to be selected from input data, separated by dashes (default=all columns)",
+        "enum": false,
+        "mandatory": false,
+        "max": "",
+        "min": "",
+        "subcategory": "",
+        "type": "str"
+    }
+}

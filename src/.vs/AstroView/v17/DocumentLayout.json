@@ -1,0 +1,703 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\wwwroot\\pixplot\\vendor\\src\\jszip.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\wwwroot\\pixplot\\vendor\\src\\jszip.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\datasetpage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\datasetpage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\layout\\mainlayout.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\layout\\mainlayout.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\api\\apicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\api\\apicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\data\\entities\\changedbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\data\\entities\\changedbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\app\\hangfirejobs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\app\\hangfirejobs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\outlierspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\outlierspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\properties\\publishprofiles\\folderprofile.pubxml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\properties\\publishprofiles\\folderprofile.pubxml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\similarspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\similarspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\predictionspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\predictionspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\imagespage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\imagespage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\clusterpage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\clusterpage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\imagepage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\imagepage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\datasetpage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\datasetpage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\app\\utils\\extensionmethods.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\app\\utils\\extensionmethods.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\app\\dbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\app\\dbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\data\\entities\\imagedbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\data\\entities\\imagedbe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\app\\models\\filters\\imagefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\app\\models\\filters\\imagefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\app\\models\\filters\\similarsimagefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\app\\models\\filters\\similarsimagefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\app\\models\\filters\\predictionsimagefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\app\\models\\filters\\predictionsimagefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\app\\models\\filters\\outliersimagefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\app\\models\\filters\\outliersimagefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\app\\models\\filters\\clusteritemfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\app\\models\\filters\\clusteritemfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\data\\migrations\\20251103082017_namereversed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\data\\migrations\\20251103082017_namereversed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\imagespage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\imagespage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\predictionspage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\predictionspage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\functions\\morphologyclassifierpage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\functions\\morphologyclassifierpage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasetspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasetspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\userspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\userspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\labelspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\labelspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\jobspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\jobspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\exportspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\exportspage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\changespage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\changespage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\userspage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\userspage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\labelspage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\labelspage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\fileexplorerpage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\fileexplorerpage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\outlierspage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\outlierspage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\jobspage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\jobspage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\clusterpage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\clusterpage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|d:\\dev\\isync\\astroview\\app\\sources\\src\\astroview.webapp\\web\\pages\\datasets\\changespage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29D50A2F-3EF7-449D-AE03-3F01C278628A}|AstroView.WebApp\\AstroView.WebApp.csproj|solutionrelative:astroview.webapp\\web\\pages\\datasets\\changespage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainLayout.razor.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Layout\\MainLayout.razor.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Layout\\MainLayout.razor.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Layout\\MainLayout.razor.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Layout\\MainLayout.razor.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAADwvz0AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T09:31:02.742Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ApiController.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Api\\ApiController.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Api\\ApiController.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Api\\ApiController.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Api\\ApiController.cs",
+              "ViewState": "AgIAANsAAAAAAAAAAADwv/YAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T09:30:41.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChangeDbe.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Data\\Entities\\ChangeDbe.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Data\\Entities\\ChangeDbe.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Data\\Entities\\ChangeDbe.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Data\\Entities\\ChangeDbe.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T09:30:36.381Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DatasetPage.razor.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\DatasetPage.razor.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\DatasetPage.razor.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\DatasetPage.razor.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\DatasetPage.razor.cs",
+              "ViewState": "AgIAAPUAAAAAAAAAAADwvxABAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T09:29:50.355Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "jszip.js",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\wwwroot\\pixplot\\vendor\\src\\jszip.js",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\wwwroot\\pixplot\\vendor\\src\\jszip.js",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\wwwroot\\pixplot\\vendor\\src\\jszip.js",
+              "RelativeToolTip": "AstroView.WebApp\\wwwroot\\pixplot\\vendor\\src\\jszip.js",
+              "ViewState": "AgIAAFEiAAAAAAAAAADwv24iAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-07T09:29:43.711Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "FolderProfile.pubxml",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Properties\\PublishProfiles\\FolderProfile.pubxml",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Properties\\PublishProfiles\\FolderProfile.pubxml",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Properties\\PublishProfiles\\FolderProfile.pubxml",
+              "RelativeToolTip": "AstroView.WebApp\\Properties\\PublishProfiles\\FolderProfile.pubxml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-11-07T07:50:19.58Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\appsettings.json",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\appsettings.json",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\appsettings.json",
+              "RelativeToolTip": "AstroView.WebApp\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-07T07:48:09.591Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\appsettings.Development.json",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\appsettings.Development.json",
+              "RelativeToolTip": "AstroView.WebApp\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-07T07:48:03.874Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "OutliersPage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\OutliersPage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\OutliersPage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\OutliersPage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\OutliersPage.razor",
+              "ViewState": "AgIAAIIAAAAAAAAAAAAAAIoAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T05:38:33.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HangfireJobs.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\HangfireJobs.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\App\\HangfireJobs.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\HangfireJobs.cs",
+              "RelativeToolTip": "AstroView.WebApp\\App\\HangfireJobs.cs",
+              "ViewState": "AgIAAJgBAAAAAAAAAADwv7MBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T18:23:30.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Properties\\launchSettings.json",
+              "RelativeToolTip": "AstroView.WebApp\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-07T07:50:15.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PredictionsPage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\PredictionsPage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\PredictionsPage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\PredictionsPage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\PredictionsPage.razor",
+              "ViewState": "AgIAAJoAAAAAAAAAAAAAALQAAACGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T18:52:20.938Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "SimilarsPage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\SimilarsPage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\SimilarsPage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\SimilarsPage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\SimilarsPage.razor",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAAAJgAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T18:52:26.691Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ImageFilter.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\Models\\Filters\\ImageFilter.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\App\\Models\\Filters\\ImageFilter.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\Models\\Filters\\ImageFilter.cs",
+              "RelativeToolTip": "AstroView.WebApp\\App\\Models\\Filters\\ImageFilter.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAADwv2EAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T07:39:09.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ImagesPage.razor.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ImagesPage.razor.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\ImagesPage.razor.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ImagesPage.razor.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\ImagesPage.razor.cs",
+              "ViewState": "AgIAAJ8AAAAAAAAAAAAiwLcAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T18:33:53.822Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ClusterPage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ClusterPage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\ClusterPage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ClusterPage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\ClusterPage.razor",
+              "ViewState": "AgIAALAAAAAAAAAAAAAAAMoAAACGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T18:51:33.335Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ImagesPage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ImagesPage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\ImagesPage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ImagesPage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\ImagesPage.razor",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAAC4AAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-03T09:44:19.795Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "DbHelper.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\DbHelper.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\App\\DbHelper.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\DbHelper.cs",
+              "RelativeToolTip": "AstroView.WebApp\\App\\DbHelper.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAiwGwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T08:31:49.976Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ExtensionMethods.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\Utils\\ExtensionMethods.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\App\\Utils\\ExtensionMethods.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\Utils\\ExtensionMethods.cs",
+              "RelativeToolTip": "AstroView.WebApp\\App\\Utils\\ExtensionMethods.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T08:33:12.964Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ImageDbe.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Data\\Entities\\ImageDbe.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Data\\Entities\\ImageDbe.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Data\\Entities\\ImageDbe.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Data\\Entities\\ImageDbe.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAiwDIAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T08:34:01.608Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ImagePage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ImagePage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\ImagePage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ImagePage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\ImagePage.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-03T09:45:29.136Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "DatasetPage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\DatasetPage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\DatasetPage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\DatasetPage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\DatasetPage.razor",
+              "ViewState": "AgIAAFgBAAAAAAAAAAAUwHUBAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T18:51:47.581Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "PredictionsImageFilter.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\Models\\Filters\\PredictionsImageFilter.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\App\\Models\\Filters\\PredictionsImageFilter.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\Models\\Filters\\PredictionsImageFilter.cs",
+              "RelativeToolTip": "AstroView.WebApp\\App\\Models\\Filters\\PredictionsImageFilter.cs",
+              "ViewState": "AgIAAKkAAAAAAAAAAADwv84AAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T07:38:37.491Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "OutliersImageFilter.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\Models\\Filters\\OutliersImageFilter.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\App\\Models\\Filters\\OutliersImageFilter.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\Models\\Filters\\OutliersImageFilter.cs",
+              "RelativeToolTip": "AstroView.WebApp\\App\\Models\\Filters\\OutliersImageFilter.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAADwv3YAAABiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T07:38:40.008Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "SimilarsImageFilter.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\Models\\Filters\\SimilarsImageFilter.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\App\\Models\\Filters\\SimilarsImageFilter.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\Models\\Filters\\SimilarsImageFilter.cs",
+              "RelativeToolTip": "AstroView.WebApp\\App\\Models\\Filters\\SimilarsImageFilter.cs",
+              "ViewState": "AgIAAGMAAAAAAAAAAADwv3MAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T07:39:07.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ClusterItemFilter.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\Models\\Filters\\ClusterItemFilter.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\App\\Models\\Filters\\ClusterItemFilter.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\App\\Models\\Filters\\ClusterItemFilter.cs",
+              "RelativeToolTip": "AstroView.WebApp\\App\\Models\\Filters\\ClusterItemFilter.cs",
+              "ViewState": "AgIAAFsAAAAAAAAAAADwv4AAAABiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T07:39:02.552Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "20251103082017_NameReversed.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Data\\Migrations\\20251103082017_NameReversed.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Data\\Migrations\\20251103082017_NameReversed.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Data\\Migrations\\20251103082017_NameReversed.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Data\\Migrations\\20251103082017_NameReversed.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T08:20:27.134Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "PredictionsPage.razor.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\PredictionsPage.razor.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\PredictionsPage.razor.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\PredictionsPage.razor.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\PredictionsPage.razor.cs",
+              "ViewState": "AgIAANgBAAAAAAAAAAAiwOwBAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T18:54:29.64Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "MorphologyClassifierPage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Functions\\MorphologyClassifierPage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Functions\\MorphologyClassifierPage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Functions\\MorphologyClassifierPage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Functions\\MorphologyClassifierPage.razor",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABcAAABmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T12:57:07.302Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "DatasetsPage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\DatasetsPage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\DatasetsPage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\DatasetsPage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\DatasetsPage.razor",
+              "ViewState": "AgIAACkAAAAAAAAAAAAAADsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T18:52:33.015Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "LabelsPage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\LabelsPage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\LabelsPage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\LabelsPage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\LabelsPage.razor",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAC0AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T18:52:47.873Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "UsersPage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\UsersPage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\UsersPage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\UsersPage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\UsersPage.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T18:52:59.66Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "JobsPage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\JobsPage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\JobsPage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\JobsPage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\JobsPage.razor",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAAAF8AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T18:52:04.507Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ExportsPage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ExportsPage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\ExportsPage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ExportsPage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\ExportsPage.razor",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAAADEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T18:51:54.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "ChangesPage.razor",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ChangesPage.razor",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\ChangesPage.razor",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ChangesPage.razor",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\ChangesPage.razor",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAFcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T18:46:58.02Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "UsersPage.razor.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\UsersPage.razor.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\UsersPage.razor.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\UsersPage.razor.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\UsersPage.razor.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAAFsAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T18:23:30.155Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "FileExplorerPage.razor.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\FileExplorerPage.razor.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\FileExplorerPage.razor.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\FileExplorerPage.razor.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\FileExplorerPage.razor.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAiwG0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T18:54:52.357Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "LabelsPage.razor.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\LabelsPage.razor.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\LabelsPage.razor.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\LabelsPage.razor.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\LabelsPage.razor.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAF4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T18:55:03.509Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "OutliersPage.razor.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\OutliersPage.razor.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\OutliersPage.razor.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\OutliersPage.razor.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\OutliersPage.razor.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAAJEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T18:54:16.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "JobsPage.razor.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\JobsPage.razor.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\JobsPage.razor.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\JobsPage.razor.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\JobsPage.razor.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAAAHgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T18:54:05.428Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "ClusterPage.razor.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ClusterPage.razor.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\ClusterPage.razor.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ClusterPage.razor.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\ClusterPage.razor.cs",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAiwKAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T18:53:43.359Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "ChangesPage.razor.cs",
+              "DocumentMoniker": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ChangesPage.razor.cs",
+              "RelativeDocumentMoniker": "AstroView.WebApp\\Web\\Pages\\Datasets\\ChangesPage.razor.cs",
+              "ToolTip": "D:\\Dev\\ISYNC\\AstroView\\App\\Sources\\src\\AstroView.WebApp\\Web\\Pages\\Datasets\\ChangesPage.razor.cs",
+              "RelativeToolTip": "AstroView.WebApp\\Web\\Pages\\Datasets\\ChangesPage.razor.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAiwGgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T18:47:29.351Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+    "datalist-key": {
+        "advanced": 0,
+        "category": "INPUT",
+        "default": "data",
+        "description": "Dictionary key name to be read in input datalist (default=data)",
+        "enum": false,
+        "mandatory": false,
+        "max": "",
+        "min": "",
+        "subcategory": "",
+        "type": "str"
+    },
+    "imgsize": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": 224,
+        "description": "Image resize size in pixels (default=224)",
+        "enum": false,
+        "mandatory": false,
+        "max": 1024,
+        "min": 8,
+        "subcategory": "",
+        "type": "int"
+    },
+    "k": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": 1,
+        "description": "Number of neighbors in similarity search (default=10)",
+        "enum": false,
+        "mandatory": false,
+        "max": 100000,
+        "min": 1,
+        "subcategory": "",
+        "type": "int"
+    },
+    "large-data-thr": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": 1,
+        "description": "Number of data entries above which an approximate search algorithm is used (default=1000000)",
+        "enum": false,
+        "mandatory": false,
+        "max": 100000,
+        "min": 1,
+        "subcategory": "",
+        "type": "int"
+    },
+    "M": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": 8,
+        "description": "The number of sub-quantizers in Product Quantization (default=8)",
+        "enum": false,
+        "mandatory": false,
+        "max": 100000,
+        "min": 1,
+        "subcategory": "",
+        "type": "int"
+    },
+    "model": {
+        "advanced": 0,
+        "allowed_values": [
+            "simclr-smgps"
+        ],
+        "category": "MODEL",
+        "default": "simclr-smgps",
+        "description": "Feature extractor model to be used",
+        "enum": true,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "str"
+    },
+    "nlist": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": 100,
+        "description": "The number of clusters (inverted lists) for the IVFPQ index (default=100)",
+        "enum": false,
+        "mandatory": false,
+        "max": 100000,
+        "min": 1,
+        "subcategory": "",
+        "type": "int"
+    },
+    "no-logredir": {
+        "advanced": 0,
+        "category": "RUN",
+        "description": "Do not redirect logs to output file in script",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "nprobe": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": 10,
+        "description": "The number of clusters to visit during search. Larger nprobe = better recall but slower (default=10)",
+        "enum": false,
+        "mandatory": false,
+        "max": 100000,
+        "min": 1,
+        "subcategory": "",
+        "type": "int"
+    },
+    "outfile": {
+        "advanced": 0,
+        "category": "OUTPUT",
+        "default": "outlier_data",
+        "description": "Name of output file in ascii format (default=outlier_data)",
+        "enum": false,
+        "mandatory": false,
+        "max": "",
+        "min": "",
+        "subcategory": "",
+        "type": "str"
+    },
+    "score-thr": {
+        "advanced": 0,
+        "category": "PREPROCESSING",
+        "default": 0.0,
+        "description": "Similarity threshold below which neighbors are not include in graph (default=0.0)",
+        "enum": false,
+        "mandatory": false,
+        "max": 1.0,
+        "min": 0.0,
+        "subcategory": "",
+        "type": "float"
+    },
+    "selcols": {
+        "advanced": 0,
+        "category": "INPUT",
+        "default": "",
+        "description": "Data column ids to be selected from input data, separated by commas (default=all columns)",
+        "enum": false,
+        "mandatory": false,
+        "max": "",
+        "min": "",
+        "subcategory": "",
+        "type": "str"
+    },
+    "zscale": {
+        "advanced": 0,
+        "category": "PREPROCESSING",
+        "description": "Apply zscale transform",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "zscale-contrast": {
+        "advanced": 0,
+        "category": "PREPROCESSING",
+        "default": 0.25,
+        "description": "ZScale transform contrast (default=0.25)",
+        "enum": false,
+        "mandatory": false,
+        "max": 1.0,
+        "min": 0.0,
+        "subcategory": "",
+        "type": "float"
+    }
+}

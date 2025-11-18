@@ -1,0 +1,9 @@
+﻿<div>
+    Dataset Type:
+    <div class="ui small basic toggle buttons">
+        @foreach (var variation in DisplayModes)
+        {
+            <div class="ui button @(variation == SelectedDisplayMode ? "active" : "")" @onclick="() => SelectVariation(variation)">@variation.Name</div>
+        }
+    </div>
+</div>

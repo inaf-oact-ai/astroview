@@ -1,0 +1,225 @@
+﻿@page "/Datasets/{DatasetId:int}/Outliers/{CaesarJobId:int}"
+@inherits AppPageBase
+<PageTitle>@vm.DatasetName - Outliers</PageTitle>
+<Breadcrumbs PageName="DatasetOutliers" DatasetName="@vm.DatasetName" DatasetId="@DatasetId" CaesarJobId="@CaesarJobId"></Breadcrumbs>
+
+<div class="page-header">
+    <span class="page-header-title">@vm.DatasetName - Outliers (@vm.DisplayModeName)</span>
+    <div>
+        <button class="ui icon button @(vm.Filter.IsApplied() ? "primary" : "basic")" @onclick="ShowFilterModal">
+            <i class="filter icon"></i>
+        </button>
+        Display Mode:&nbsp;
+        <div class="ui small basic toggle buttons">
+            @foreach (var mode in vm.DisplayModes)
+            {
+                <div class="ui button @(mode.Id == DisplayMode.Id ? "active" : "")" @onclick="() => SetDisplayMode(mode.Id)">@mode.Name</div>
+            }
+        </div>
+    </div>
+</div>
+
+@if (vm.Filter.IsApplied())
+{
+    <div class="ui message">
+        <div class="header">Filter Applied</div>
+        <p>@vm.Filter.GetDescription(vm.Labels)</p>
+    </div>
+}
+
+<div class="page-header">
+    <span></span>
+    <div>
+        Outlier:
+        <div class="ui small basic toggle buttons">
+            <div class="ui button @(vm.OutlierStatus == null ? "active" : "")" @onclick="() => SetOutlierStatus(null)">Any</div>
+            <div class="ui button @(vm.OutlierStatus == true ? "active" : "")" @onclick="() => SetOutlierStatus(true)">True</div>
+            <div class="ui button @(vm.OutlierStatus == false ? "active" : "")" @onclick="() => SetOutlierStatus(false)">False</div>
+        </div>
+        Sort:
+        <div class="ui small basic toggle buttons">
+            <div class="ui button @(vm.SortDesc == true ? "active" : "")" @onclick="() => SetSortDesc(true)">Desc</div>
+            <div class="ui button @(vm.SortDesc == false ? "active" : "")" @onclick="() => SetSortDesc(false)">Asc</div>
+        </div>
+    </div>
+</div>
+
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Labels</th>
+            <th>Outlier</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var outlier in vm.Items)
+        {
+            <tr>
+                <td class="collapsing">
+                    <a href="/Datasets/@DatasetId/Images/@outlier.ImageId" target="_blank">
+                        @if (DisplayMode.IsFits())
+                        {
+                            <span class="ui horizontal label">FITS</span>
+                        }
+                        else
+                        {
+                            <img src="@outlier.ImageUrl" style="max-width:100px" />
+                        }
+                    </a>
+                </td>
+                <td class="collapsing">
+                    <a href="/Datasets/@DatasetId/Images/@outlier.ImageId" target="_blank">@outlier.ImageName</a>
+                </td>
+                <td>
+                    @foreach (var imageLabel in outlier.Labels)
+                    {
+                        var label = vm.LabelsById[imageLabel.LabelId];
+                        
+                        <a class="ui @label.Color tag label small" style="margin-top: 2px; margin-bottom: 2px">@label.Name
+                            &nbsp;
+                            @if (imageLabel.Value > 0) 
+                            {
+                                var probability = (imageLabel.Value * 100).ToString("0.00") + "%";
+                                <span>(@probability)</span>
+                            }
+                        </a>
+                    }
+                </td>
+                <td class="collapsing">@outlier.IsOutlier</td>
+                <td class="collapsing">@outlier.OutlierScore</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+         <tr>
+            <td colspan="5">Total: @vm.Paging.RecordsCount</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div style="text-align: right">
+    <div class="ui action mini input">
+        <InputNumber @bind-Value="PageNumber" step="1" min="1"></InputNumber>
+        <button class="ui mini button" @onclick="GoToPage">Go</button>
+    </div>
+
+    <div class="ui mini pagination menu">
+        <a class="icon item" href="/Datasets/@DatasetId/Outliers/@CaesarJobId?PageNumber=1&PageSize=@PageSize">
+            <i class="angle double left icon"></i>
+        </a>
+        <a class="icon item" href="/Datasets/@DatasetId/Outliers/@CaesarJobId?PageNumber=@(PageNumber - 1)&PageSize=@PageSize">
+            <i class="angle left icon"></i>
+        </a>
+        @foreach (var pagingButton in vm.Paging.PagingButtons)
+        {
+            <a class="item @(pagingButton == (PageNumber ?? 1) ? "active" : "")" href="/Datasets/@DatasetId/Outliers/@CaesarJobId?PageNumber=@pagingButton&PageSize=@PageSize">@pagingButton</a>
+        }
+        <a class="icon item" href="/Datasets/@DatasetId/Outliers/@CaesarJobId?PageNumber=@(PageNumber + 1)&PageSize=@PageSize">
+            <i class="angle right icon"></i>
+        </a>
+        <a class="icon item" href="/Datasets/@DatasetId/Outliers/@CaesarJobId?PageNumber=@vm.Paging.MaxPageNumber&PageSize=@PageSize">
+            <i class="angle double right icon"></i>
+        </a>
+    </div>
+</div>
+
+<script>
+    function showFilterModal() { $('#filter-modal').modal('show'); }
+    function hideFilterModal() { $('#filter-modal').modal('hide'); }
+
+    function initLabelsDropdown(activeLabelIds) {
+    $('#labelsDropdown').dropdown('clear');
+    $('#labelsDropdown').dropdown('set selected', activeLabelIds);
+    }
+
+    function getLabelsDropdownValues() {
+    return $('#labelsDropdown').dropdown('get values');
+    }
+
+    function destroyLabelsDropdown() {
+    $('#labelsDropdown').dropdown('destroy');
+    $('.selection.multiple').remove();
+    }
+</script>
+
+<div class="ui modal" id="filter-modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Image Filter
+    </div>
+    <div class="content">
+        <div class="ui form">
+            <div class="four fields">
+                <div class="field">
+                    <label data-tooltip="Use an asterisk (*) at the beginning, end, or both to perform a wildcard search">Name</label>
+                    <InputText @bind-Value="vm.Filter.Name" />
+                </div>
+                <div class="field">
+                    <label>Telescope</label>
+                    <InputText @bind-Value="vm.Filter.Telescope" />
+                </div>
+                <div class="field">
+                    <label>Survey</label>
+                    <InputText @bind-Value="vm.Filter.Survey" />
+                </div>
+                <div class="field">
+                    <label>Project</label>
+                    <InputText @bind-Value="vm.Filter.Project" />
+                </div>
+            </div>
+            <div class="four fields">
+                <div class="field">
+                    <label>Ra (FK5)</label>
+                    <InputNumber @bind-Value="vm.Filter.Ra" />
+                </div>
+                <div class="field">
+                    <label>Dec (FK5)</label>
+                    <InputNumber @bind-Value="vm.Filter.Dec" />
+                </div>
+                <div class="field">
+                    <label>Galactic Longitude</label>
+                    <InputNumber @bind-Value="vm.Filter.GLon" />
+                </div>
+                <div class="field">
+                    <label>Galactic Latitude</label>
+                    <InputNumber @bind-Value="vm.Filter.Glat" />
+                </div>
+            </div>
+            <div class="four fields">
+                <div class="field">
+                    <label>Min Score <i class="greater than equal icon"></i></label>
+                    <InputNumber @bind-Value="vm.Filter.MinScore" min="0" max="1" step="0.1" />
+                </div>
+                <div class="field">
+                    <label>Max Score <i class="less than equal icon"></i></label>
+                    <InputNumber @bind-Value="vm.Filter.MaxScore" min="0" max="1" step="0.1" />
+                </div>
+                <div class="field">
+                </div>
+                <div class="field">
+                </div>
+            </div>
+            <div class="fields">
+                <div class="twelve wide field">
+                    <label>Labels</label>
+                    <select id="labelsDropdown" class="ui fluid search dropdown" multiple="">
+                        @foreach (var label in vm.Labels)
+                        {
+                            <option value="@label.Id">@label.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="four wide field">
+                    <label></label>
+                    <div style="display: flex">
+                        <button class="ui fluid primary button" @onclick="ApplyFilter">Apply</button>
+                        <button class="ui button" @onclick="ClearFilter">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

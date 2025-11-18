@@ -1,0 +1,178 @@
+﻿@page "/Datasets/{DatasetId:int}/IndividualSimilaritySearch"
+@inherits AppPageBase
+<PageTitle>Individual Similarity Search</PageTitle>
+<Breadcrumbs PageName="DatasetFunctionIndividualSimilaritySearch" DatasetName="@vm.DatasetName" DatasetId="@DatasetId"></Breadcrumbs>
+
+<div class="page-header">
+    <span class="page-header-title">Individual Similarity Search</span>
+    <DisplayModeSelector DatasetId="DatasetId" OnDisplayModeChanged="OnDisplayModeChanged" />
+</div>
+
+@if (vm.ExecuteDisabled)
+{
+    <div class="ui negative message">
+        <p>Caesar Dataset must be generated for Display Mode: @vm.SelectedDisplayMode?.Name</p>
+    </div>
+}
+
+<div class="ui four column grid">
+    <div class="row">
+        <div class="column">
+            <h4 class="ui dividing header">Model</h4>
+            <div class="ui form">
+                <div class="field">
+                    <label>Feature extractor model to be used</label>
+                    <InputText disabled @bind-Value="vm.Parameters.Model"></InputText>
+                </div>
+            </div>
+            <h4 class="ui dividing header">Input</h4>
+            <div class="ui form">
+                <div class="field warning">
+                    <label>Selected file</label>
+                    <div class="ui action input">
+                        <InputText @bind-Value="vm.Parameters.FilePath"></InputText>
+                        <button class="ui icon button" @onclick="ShowSelectFileDialog"><i class="photo video icon"></i></button>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Data column ids to be selected from input data, separated by commas</label>
+                    <InputText @bind-Value="vm.Parameters.SelCols"></InputText>
+                </div>
+                <div class="field">
+                    <label>Dictionary key name to be read in input datalist</label>
+                    <InputText disabled @bind-Value="vm.Parameters.DatalistKey"></InputText>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <h4 class="ui dividing header">Pre-processing</h4>
+            <div class="ui form">
+                <div class="field">
+                    <label>Similarity threshold below which neighbors are not include in graph</label>
+                    <InputNumber @bind-Value="vm.Parameters.ScoreThr"></InputNumber>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="Zscale" @bind-Value="vm.Parameters.Zscale"></InputCheckbox>
+                        <label for="Zscale">Apply zscale transform</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>ZScale transform contrast</label>
+                    <InputNumber @bind-Value="vm.Parameters.ZscaleContrast"></InputNumber>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <h4 class="ui dividing header">Processing</h4>
+            <div class="ui form">
+                <div class="field">
+                    <label>Image resize size in pixels</label>
+                    <InputNumber @bind-Value="vm.Parameters.ImgSize"></InputNumber>
+                </div>
+                <div class="field">
+                    <label>Number of neighbors in similarity search</label>
+                    <InputNumber @bind-Value="vm.Parameters.K"></InputNumber>
+                </div>
+                <div class="field">
+                    <label>Number of data entries above which an approximate search algorithm is used</label>
+                    <InputNumber @bind-Value="vm.Parameters.LargeDataThr"></InputNumber>
+                </div>
+                <div class="field">
+                    <label>The number of sub-quantizers in Product Quantization</label>
+                    <InputNumber @bind-Value="vm.Parameters.M"></InputNumber>
+                </div>
+                <div class="field">
+                    <label>The number of clusters (inverted lists) for the IVFPQ index</label>
+                    <InputNumber @bind-Value="vm.Parameters.Nlist"></InputNumber>
+                </div>
+                <div class="field">
+                    <label>The number of clusters to visit during search. Larger nprobe = better recall but slower</label>
+                    <InputNumber @bind-Value="vm.Parameters.Nprobe"></InputNumber>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <h4 class="ui dividing header">Run</h4>
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui checkbox">
+                        <InputCheckbox id="noLogRedir" @bind-Value="vm.Parameters.NoLogRedir"></InputCheckbox>
+                        <label for="noLogRedir">Do not redirect logs to output file in script</label>
+                    </div>
+                </div>
+            </div>
+            <h4 class="ui dividing header">Output</h4>
+            <div class="ui form">
+                <div class="field">
+                    <label>Name of output file in ascii format</label>
+                    <InputText disabled @bind-Value="vm.Parameters.Outfile"></InputText>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="four wide column">
+            <button class="ui compact primary button @(vm.ShowExecuteLoader ? "loading" : "")" disabled=@vm.ExecuteDisabled @onclick="Execute">Execute</button>
+            <button class="ui compact button @(vm.ShowLoadDescriptionLoader ? "loading" : "")" @onclick="LoadDescription">Load Description</button>
+        </div>
+    </div>
+    @if (vm.Description.Length > 0)
+    {
+        <div class="row">
+            <div class="sixteen wide column">
+                <div class="ui message">
+                    <pre>@((MarkupString)vm.Description)</pre>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Select File
+    </div>
+    <div class="content">
+        <table class="ui striped table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Path</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var file in AppVm.Files)
+                {
+                    <tr>
+                        <td class="collapsing">
+                            @if (file.IsImage)
+                            {
+                                <img src="@file.Url" style="max-width:100px" />
+                            }
+                            else
+                            {
+                                <i class="ui file icon"></i>
+                            }
+                        </td>
+                        <td class="collapsing">
+                            @file.Name
+                        </td>
+                        <td><div style="word-break: break-all">@file.Path</div></td>
+                        <td>
+                            <button class="ui small basic button" @onclick="() => SelectFile(file)">Select</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function showModal() { $('.ui.modal').modal('show'); }
+    function hideModal() { $('.ui.modal').modal('hide'); }
+</script>

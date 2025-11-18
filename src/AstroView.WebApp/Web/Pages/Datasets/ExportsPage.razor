@@ -1,0 +1,117 @@
+﻿@page "/Datasets/{DatasetId:int}/Exports"
+@inherits AppPageBase
+<PageTitle>Changes</PageTitle>
+<Breadcrumbs PageName="DatasetExports" DatasetId="@DatasetId" DatasetName="@vm.DatasetName"></Breadcrumbs>
+
+<div class="page-header">
+    <span class="page-header-title">Exports</span>
+    <button class="ui small compact basic icon button" @onclick="RefreshExportHistory">
+        <i class="icon sync alternate"></i>
+    </button>
+</div>
+
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Details</th>
+            <th>File</th>
+            <th>Size</th>
+            <th>User</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in vm.Exports)
+        {
+            <tr>
+                <td>@item.Export.Type</td>
+                <td>
+                    <a href="/Jobs/jobs/details/@item.Export.JobId">
+                        <HangfireJobStatusLabel Status="item.Export.JobStatus" />
+                    </a>
+                </td>
+                <td>@item.Export.Details</td>
+                <td>
+                    @if (item.Export.JobStatus == HangfireJobStatus.Completed)
+                    {
+                        <a href="@item.DownloadUrl" target="_blank" download>@item.Filename</a>
+                    }
+                    else
+                    {
+                        @item.Filename
+                    }
+                </td>
+                <td>@item.Size</td>
+                <td><span data-tooltip="@item.Export.User.Email">@item.Export.User.DisplayName</span></td>
+                <td>@item.Export.Date</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="7">Total: @vm.Paging.RecordsCount</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="ui center aligned mini pagination menu">
+    <a class="icon item" href="/Datasets/@DatasetId/Exports?PageNumber=1&PageSize=@PageSize">
+        <i class="angle double left icon"></i>
+    </a>
+    <a class="icon item" href="/Datasets/@DatasetId/Exports?PageNumber=@(PageNumber - 1)&PageSize=@PageSize">
+        <i class="angle left icon"></i>
+    </a>
+    @foreach (var pagingButton in vm.Paging.PagingButtons)
+    {
+        <a class="item @(pagingButton == (PageNumber ?? 1) ? "active" : "")" href="/Datasets/@DatasetId/Exports?PageNumber=@pagingButton&PageSize=@PageSize">@pagingButton</a>
+    }
+    <a class="icon item" href="/Datasets/@DatasetId/Exports?PageNumber=@(PageNumber + 1)&PageSize=@PageSize">
+        <i class="angle right icon"></i>
+    </a>
+    <a class="icon item" href="/Datasets/@DatasetId/Exports?PageNumber=@vm.Paging.MaxPageNumber&PageSize=@PageSize">
+        <i class="angle double right icon"></i>
+    </a>
+</div>
+
+<div class="page-header">
+    <span class="page-header-title">Display Modes</span>
+</div>
+
+<table class="ui striped collapsing  table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Caesar Dataset</th>
+            <th>Size</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var mode in vm.DisplayModes)
+        {
+            <tr>
+                <td>@mode.Name</td>
+                <td>
+                    @if (mode.CaesarDatasetUrl.Length > 0)
+                    {
+                        <a href="@mode.CaesarDatasetUrl" target="_blank" download>caesar-dataset.json</a>
+                        @if (vm.DatasetModifiedDate > mode.CaesarDatasetCreatedAt || mode.CaesarDatasetCreatedAt == null)
+                        {
+                            <span data-tooltip="Caesar Dataset is out of date. To get actual version, generate it on Dataset page.">
+                                &nbsp;<i class="clock outline icon"></i>
+                            </span>
+                        }
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
+                </td>
+                <td>@mode.CaesarDatasetSize</td>
+                <td><a href="@mode.LocateDisplayModeUrl">Explore</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

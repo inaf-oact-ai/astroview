@@ -1,0 +1,20 @@
+﻿@if (Status == HangfireJobStatus.None)
+{
+    <div class="ui yellow horizontal label">Waiting</div>
+}
+else if (Status == HangfireJobStatus.Completed)
+{
+    <div class="ui green horizontal label">Completed</div>
+}
+else if (Status == HangfireJobStatus.Running)
+{
+    <div class="ui blue horizontal label">Running</div>
+}
+else if (Status == HangfireJobStatus.Failed)
+{
+    <div class="ui red horizontal label">Failed</div>
+}
+else
+{
+    <div class="ui red horizontal label">Unknown</div>
+}

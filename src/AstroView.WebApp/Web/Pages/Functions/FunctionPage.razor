@@ -1,0 +1,30 @@
+﻿@page "/Datasets/{DatasetId:int}/Functions/{CaesarJobId:int}"
+@inherits AppPageBase
+<PageTitle>@vm.Job.AppName</PageTitle>
+<Breadcrumbs PageName="DatasetFunction" DatasetName="@vm.DatasetName" DatasetId="@DatasetId" FunctionId="CaesarJobId" FunctionName="@vm.Job.AppName"></Breadcrumbs>
+
+<div class="page-header">
+    <span class="page-header-title">@vm.Job.AppName</span>
+</div>
+
+<div>Function: @vm.Job.AppName</div>
+<div>Started: @vm.Job.StartedDate</div>
+<div>Finished: @vm.Job.FinishedDate</div>   
+<div>Caesar Job Id: @vm.Job.CaesarJobId</div>
+<div>Caesar Job State: @vm.Job.CaesarJobState</div>
+<div>Caesar Job Status: @vm.Job.CaesarJobStatus</div>
+<div>User: @vm.Job.User.UserName</div>
+<br />
+<div>Caesar Dataset: <a href="@vm.CaesarDatasetDirectoryUrl">View</a></div>
+@if (vm.Job.ResultJobId != null)
+{
+    <div>Result Files: <a href="/FileExplorer/Storage/@vm.JobOutputPath">View</a></div>
+    <div>Result Processing Job: <a href="/Jobs/jobs/details/@vm.Job.ResultJobId">View</a></div>
+}
+
+<h3>Request</h3>
+<textarea style="width: 100%; height: 400px">@vm.Job.RequestJson</textarea>
+<h3>Response</h3>
+<textarea style="width: 100%; height: 400px">@vm.Job.ResponseJson</textarea>
+<h3>Error</h3>
+<textarea style="width: 100%; height: 400px">@vm.Job.Error</textarea>

@@ -1,0 +1,247 @@
+﻿main {
+    padding-bottom: 30px;
+    flex: 1;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-text {
+    font-size: 12px;
+    margin: 0;
+    text-align: center;
+}
+
+.footer-logos {
+    margin-top: -20px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eu-logos {
+    margin-left: -45px;
+}
+
+.intellisync-logo {
+    max-width: 175px;
+}
+
+.main-container {
+    margin-top: 10px;
+    height: 100%;
+    display: flex !important;
+    flex-direction: column;
+}
+
+    .main-container > .menu {
+        min-height: 54px !important;
+        border-radius: 8px !important;
+    }
+
+        .main-container > .menu > .header {
+            font-size: 20px;
+            background: linear-gradient(to right, #5D52E5 0%, #D578F4 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+
+            .main-container > .menu > .header > a {
+                margin-top: -5px;
+            }
+
+.menu-icon {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.star-icon {
+    color: #FFB340;
+}
+
+    .star-icon.outline {
+        color: #8D8D8D;
+    }
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0px;
+}
+
+.page-header-title {
+    font-size: 20px;
+}
+
+.dataset-card {
+    height: 110px;
+}
+
+.dataset-card-content {
+    padding: 1em;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dataset-card .primary-number {
+    font-size: 26px;
+}
+
+.dataset-card .secondary-number {
+    font-size: 20px;
+}
+
+.dataset-primary-card {
+    width: 100% !important;
+    height: 235px;
+}
+
+    .dataset-primary-card > .content > .primary-description {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .dataset-primary-card .info-row {
+        margin-bottom: 10px;
+    }
+
+.change-counter {
+    color: #4438E5 !important;
+    background-color: #4438E51A !important;
+}
+
+.login-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.login-container {
+    flex: 1;
+}
+
+.login-column {
+    max-width: 400px;
+}
+
+.login-footer {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* === UTILS === */
+.w100px {
+    width: 100px;
+}
+
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pointer:hover {
+    cursor: pointer !important;
+}
+
+/* == SEMANTIC OVERRIDES == */
+
+a {
+    color: #4438E5 !important;
+}
+
+    a:hover {
+        color: #2418C5 !important;
+    }
+
+    a.label {
+        color: #FFF !important;
+    }
+
+.breadcrumb .active.section {
+    font-weight: normal !important;
+    color: black;
+}
+
+.ui.form .field > label {
+    font-weight: normal !important;
+}
+
+.green.horizontal.label {
+    color: #30935D !important;
+    background-color: #30935D1A !important;
+}
+
+.blue.horizontal.label {
+    color: #006CE0 !important;
+    background-color: #006CE012 !important;
+}
+
+.red.horizontal.label {
+    color: #D70015 !important;
+    background-color: #D7001512 !important;
+}
+
+.yellow.horizontal.label {
+    color: #C93400 !important;
+    background-color: #FF950021 !important;
+}
+
+.secondary.menu {
+    background-color: #EBEAF8 !important;
+}
+
+.primary.button {
+    color: #141414 !important;
+    background-color: #C6C3F7 !important;
+}
+
+.breadcrumb a {
+    color: #14141499 !important;
+}
+
+    .breadcrumb a.active {
+        color: #141414 !important;
+    }
+
+.ui.secondary.menu .active.item {
+    color: #4438E5 !important;
+    background: none !important;
+}
+
+.ui.secondary.menu .item {
+    color: #141414 !important;
+}
+
+.dropdown a.label {
+    color: black !important;
+}
+
+.toast-class {
+    background-color: #409CFF4D !important;
+}
+
+.error-toast-class {
+    background-color: #FF69614D !important;
+}
+
+.ui.toast.red {
+    background-color: #FFD2D0 !important;
+    color: #141414 !important;
+    border: 1px solid #FF8982;
+}
+
+.ui.toast.orange {
+    background-color: #FFE8C6 !important;
+    color: #141414 !important;
+    border: 1px solid #FFC368;
+}

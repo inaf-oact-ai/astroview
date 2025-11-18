@@ -1,0 +1,49 @@
+﻿.back-button {
+    color: #9A9A9A;
+}
+
+    .back-button:hover {
+        color: #F4F4F4;
+    }
+
+.black-tag {
+    color: #141414 !important;
+}
+
+.validation-errors {
+    color: #9A9A9A;
+}
+
+.dataset-primary-card {
+    background: transparent !important;
+    box-shadow: 0 1px 3px 0 #725D80, 0 0 0 1px #725D80 !important;
+}
+
+.secondary-label {
+    color: #9A9A9A;
+}
+
+.dataset-card .icon {
+    color: #F4F4F4;
+}
+
+    .dataset-card .icon:hover {
+        color: #9A9A9A;
+    }
+
+
+/* == SEMANTIC OVERRIDES == */
+
+.breadcrumb .active.section {
+    color: white;
+}
+.main-container > .menu > .header {
+    background: linear-gradient(to right, #A6A1E6 0%, #DCA9ED 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.ui.table > thead > tr > th {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}

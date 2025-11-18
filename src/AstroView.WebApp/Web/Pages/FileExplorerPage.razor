@@ -1,0 +1,212 @@
+﻿@page "/FileExplorer/{type}/{*pageRoute}"
+@inherits AppPageBase
+<PageTitle>@Type</PageTitle>
+
+<div class="page-header">
+    <span class="page-header-title">@Type</span>
+</div>
+
+<div class="flex-space-between" style="align-items: flex-end">
+    <div class="ui breadcrumb">
+        @for (var i = 0; i < vm.RouteParts.Count; i++)
+        {
+            var part = vm.RouteParts[i];
+            if (vm.RouteParts.Count == i + 1)
+            {
+                <a class="active section" href="@part.Url">@part.Name</a>
+            }
+            else
+            {
+                <a class="section" href="@part.Url">@part.Name</a>
+                <div class="divider"> / </div>
+            }
+        }
+    </div>
+    @if (AppVm.CurrentDatasetId != 0 && !AppVm.CurrentDatasetIsLocked)
+    {
+        <div>
+            <button class="ui small compact primary button @(vm.IsBusy ? "loading" : "")" @onclick="() => AddImages()">
+                Add FITS to @AppVm.CurrentDatasetName
+            </button>
+        </div>
+    }
+</div>
+
+<table class="ui striped table">
+    <thead>
+        <tr>
+            <th>
+                <div class="ui checkbox">
+                    <InputCheckbox Value="vm.ToggleAllChecked"
+                    ValueExpression="() => vm.ToggleAllChecked"
+                    ValueChanged="ToggleAll">
+                    </InputCheckbox>
+                    <label></label>
+                </div>
+            </th>
+            <th></th>
+            <th>Name</th>
+            <th>Size</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in vm.Items)
+        {
+            if (item.Type == ItemType.BackButton)
+            {
+                <tr>
+                    <td class="collapsing"></td>
+                    <td class="collapsing">
+                        <i class="level up alternate icon"></i>
+                    </td>
+                    <td>
+                        <a href="/FileExplorer/@Type/@item.UrlSuffix"><div style="width:100%">@item.Name</div></a>
+                    </td>
+                    <td></td>
+                    <td class="collapsing"></td>
+                </tr>
+            }
+            else if (item.Type == ItemType.Directory)
+            {
+                <tr>
+                    <td class="collapsing">
+                        <div class="ui checkbox">
+                            <InputCheckbox @bind-Value="item.IsChecked"></InputCheckbox>
+                            <label></label>
+                        </div>
+                    </td>
+                    <td class="collapsing">
+                        <i class="folder icon"></i>
+                    </td>
+                    <td>
+                        <a href="/FileExplorer/@Type/@item.UrlSuffix">@item.Name</a>
+                    </td>
+                    <td>@item.Size</td>
+                    <td class="collapsing">
+                    </td>
+                </tr>
+            }
+            else if (item.Type == ItemType.File)
+            {
+                <tr>
+                    <td class="collapsing">
+                        @if (item.CanBeChecked)
+                        {
+                            <div class="ui checkbox">
+                                <InputCheckbox @bind-Value="item.IsChecked"></InputCheckbox>
+                                <label></label>
+                            </div>
+                        }
+                    </td>
+                    <td class="collapsing">
+                        <i class="file outline icon"></i>
+                    </td>
+                    <td>
+                        <a href="/static/@Type/@item.UrlSuffix" target="_blank">@item.Name</a>
+                    </td>
+                    <td>@item.Size</td>
+                    <td class="collapsing">
+                        @if (item.CanBeImported)
+                        {
+                            <div class="flex-space-between">
+                                <button class="ui compact primary small button" @onclick="() => ShowImportFileForm(item)">Import</button>
+                            </div>
+                        }
+                        else
+                        {
+                            <button class="ui compact basic icon button" @onclick="() => AddFileToNotes(item)">
+                                <i class="icon photo video"></i>
+                            </button>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5">Total: @vm.Paging.RecordsCount</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div style="text-align: right">
+    <div class="ui action mini input">
+        <InputNumber @bind-Value="PageNumber" step="1" min="1"></InputNumber>
+        <button class="ui mini button" @onclick="GoToPage">Go</button>
+    </div>
+
+    <div class="ui mini pagination menu">
+        <a class="icon item" href="@vm.PageUrl?PageNumber=1&PageSize=@PageSize">
+            <i class="angle double left icon"></i>
+        </a>
+        <a class="icon item" href="@vm.PageUrl?PageNumber=@(PageNumber - 1)&PageSize=@PageSize">
+            <i class="angle left icon"></i>
+        </a>
+        @foreach (var pagingButton in vm.Paging.PagingButtons)
+        {
+            <a class="item @(pagingButton == (PageNumber ?? 1) ? "active" : "")" href="@vm.PageUrl?PageNumber=@pagingButton&PageSize=@PageSize">@pagingButton</a>
+        }
+        <a class="icon item" href="@vm.PageUrl?PageNumber=@(PageNumber + 1)&PageSize=@PageSize">
+            <i class="angle right icon"></i>
+        </a>
+        <a class="icon item" href="@vm.PageUrl?PageNumber=@vm.Paging.MaxPageNumber&PageSize=@PageSize">
+            <i class="angle double right icon"></i>
+        </a>
+    </div>
+</div>
+
+<div class="ui mini modal">
+    <i class="close icon"></i>
+    <div class="header">
+        @vm.ImportFileModel.SelectedFile.Name
+    </div>
+    <div class="content">
+        <form class="ui form">
+            <div class="field">
+                <div class="ui checkbox">
+                    <InputCheckbox @bind-Value="vm.ImportFileModel.ImportFeatures" id="import-dlg-features"></InputCheckbox>
+                    <label for="import-dlg-features">Features</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui checkbox">
+                    <InputCheckbox @bind-Value="vm.ImportFileModel.ImportLabels" id="import-dlg-labels"></InputCheckbox>
+                    <label for="import-dlg-labels">Labels</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui checkbox">
+                    <InputCheckbox @bind-Value="vm.ImportFileModel.ImportMetadata" id="import-dlg-metadata"></InputCheckbox>
+                    <label for="import-dlg-metadata">Metadata</label>
+                </div>
+            </div>         
+            <div class="field" data-tooltip="By default FITS files are matched by 'sname' field. If you set this checkbox, FITS files will be matched by the name extracted from 'filepath[0]' field.">
+                <div class="ui checkbox">
+                    <InputCheckbox @bind-Value="vm.ImportFileModel.ExtractNameFromFilepath" id="import-dlg-filepath-name"></InputCheckbox>
+                    <label for="import-dlg-filepath-name">Extract name from filepath</label>
+                </div>
+
+            </div>
+            @if (AppVm.CurrentDatasetId > 0)
+            {
+                <a class="ui small compact primary button" @onclick="ImportFile">Import to @AppVm.CurrentDatasetName</a>
+                <br />
+                <br />
+            }
+            <div class="field">
+                <label>Dataset Name</label>
+                <div class="ui left input">
+                    <InputText @bind-Value="vm.ImportFileModel.DatasetName" />
+                </div>
+            </div>
+            <a class="ui small compact primary button" @onclick="CreateDataset">Create Dataset</a>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showModal() { $('.ui.modal').modal('show'); }
+    function hideModal() { $('.ui.modal').modal('hide'); }
+</script>

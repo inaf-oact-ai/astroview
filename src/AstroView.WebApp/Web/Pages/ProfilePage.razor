@@ -1,0 +1,59 @@
+﻿@page "/Profile"
+@inherits AppPageBase
+<PageTitle>Account Settings</PageTitle>
+@* <Breadcrumbs PageName="Profile"></Breadcrumbs> *@
+
+<div class="page-header">
+    <span class="page-header-title">Account Settings</span>
+</div>
+
+@* <div class="summary">
+    Email: @vm.User.Email
+</div> *@
+
+@* <span>Toggle dark mode: </span>
+<a class="item" href="/ToggleDarkMode"
+   data-tooltip="Toggle dark mode"
+   data-position="bottom center"
+   data-variation="small"><i class="sun icon menu-icon"></i></a> *@
+
+<div class="ui three column grid">
+    <div class="column">
+        <EditForm Model="vm.UpdateProfileForm" method="post" OnValidSubmit="UpdateProfile" class="ui form">
+            <DataAnnotationsValidator />
+            <h4>Profile</h4>
+            <div class="field">
+                <label>Email</label>
+                <InputText @bind-Value="vm.User.Email" disabled />
+            </div>
+            <div class="field">
+                <label>Display Name</label>
+                <InputText @bind-Value="vm.UpdateProfileForm.DisplayName" type="text" />
+            </div>
+            <button type="submit" class="ui small compact primary button">Update Profile</button>
+            <ValidationSummary />
+            <div>@vm.UpdateProfileForm.ErrorMessage</div>
+        </EditForm>
+    </div>
+    <div class="column">
+        <EditForm Model="vm.ChangePasswordForm" method="post" OnValidSubmit="ChangePassword" class="ui form">
+            <DataAnnotationsValidator />
+            <h4>Security</h4>
+            <div class="field">
+                <label>Old Password</label>
+                <InputText @bind-Value="vm.ChangePasswordForm.CurrentPassword" type="password" />
+            </div>
+            <div class="field">
+                <label>New Password</label>
+                <InputText @bind-Value="vm.ChangePasswordForm.NewPassword" type="password" />
+            </div>
+            <div class="field">
+                <label>Confirm Password</label>
+                <InputText @bind-Value="vm.ChangePasswordForm.NewPasswordConfirm" type="password" />
+            </div>
+            <button type="submit" class="ui small compact primary button">Change Password</button>
+            <ValidationSummary />
+            <div>@vm.ChangePasswordForm.ErrorMessage</div>
+        </EditForm>
+    </div>
+</div>

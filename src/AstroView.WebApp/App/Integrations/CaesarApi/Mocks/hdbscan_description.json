@@ -1,0 +1,185 @@
+{
+    "cluster-selection-epsilon": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": 0.0,
+        "description": "A distance threshold. Clusters below this value will be merged (default=0)",
+        "enum": false,
+        "mandatory": false,
+        "max": 10000.0,
+        "min": 0.0,
+        "subcategory": "",
+        "type": "float"
+    },
+    "datalist-key": {
+        "advanced": 0,
+        "category": "INPUT",
+        "default": "data",
+        "description": "Dictionary key name to be read in input datalist (default=data)",
+        "enum": false,
+        "mandatory": false,
+        "max": "",
+        "min": "",
+        "subcategory": "",
+        "type": "str"
+    },
+    "min-cluster-size": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": 5,
+        "description": "Minimum cluster size for HDBSCAN clustering (default=5)",
+        "enum": false,
+        "mandatory": false,
+        "max": 10000,
+        "min": 1,
+        "subcategory": "",
+        "type": "int"
+    },
+    "min-samples": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": -1,
+        "description": "Minimum cluster sample parameter for HDBSCAN clustering. <0 means setting it to None, which means equal to min_cluster_size (default=-1)",
+        "enum": false,
+        "mandatory": false,
+        "max": 10000,
+        "min": -1,
+        "subcategory": "",
+        "type": "int"
+    },
+    "no-logredir": {
+        "advanced": 0,
+        "category": "RUN",
+        "description": "Do not redirect logs to output file in script",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "normalize_minmax": {
+        "advanced": 0,
+        "category": "PREPROCESSING",
+        "description": "Normalize each channel in range",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "no-save-ascii": {
+        "advanced": 0,
+        "category": "OUTPUT",
+        "description": "Do not save output in ascii format",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "no-save-features": {
+        "advanced": 0,
+        "category": "OUTPUT",
+        "description": "Do not save features in output files",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "no-save-json": {
+        "advanced": 0,
+        "category": "OUTPUT",
+        "description": "Do not save output in json format",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "no-save-model": {
+        "advanced": 0,
+        "category": "OUTPUT",
+        "description": "Do not save model",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "outfile": {
+        "advanced": 0,
+        "category": "OUTPUT",
+        "default": "outlier_data",
+        "description": "Name of output file in ascii format (default=outlier_data)",
+        "enum": false,
+        "mandatory": false,
+        "max": "",
+        "min": "",
+        "subcategory": "",
+        "type": "str"
+    },
+    "outfile-json": {
+        "advanced": 0,
+        "category": "OUTPUT",
+        "default": "outlier_data.json",
+        "description": "Name of output file in json format (default=outlier_data.json)",
+        "enum": false,
+        "mandatory": false,
+        "max": "",
+        "min": "",
+        "subcategory": "",
+        "type": "str"
+    },
+    "pca-ncomps": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": -1,
+        "description": "Number of PCA components to be used (-1=retain all cumulating a variance above threshold) (default=-1)",
+        "enum": false,
+        "mandatory": false,
+        "max": 10000,
+        "min": -1,
+        "subcategory": "",
+        "type": "int"
+    },
+    "pca-varthr": {
+        "advanced": 0,
+        "category": "PROCESSING",
+        "default": 0.9,
+        "description": "Cumulative variance threshold used to retain PCA components (default=0.9)",
+        "enum": false,
+        "mandatory": false,
+        "max": 1.0,
+        "min": 0.0,
+        "subcategory": "",
+        "type": "float"
+    },
+    "reduce-dim": {
+        "advanced": 0,
+        "category": "PREPROCESSING",
+        "description": "Reduce feature data dimensionality before applying the clustering",
+        "enum": false,
+        "mandatory": false,
+        "subcategory": "",
+        "type": "none"
+    },
+    "reduce-dim-method": {
+        "advanced": 0,
+        "category": "INPUT",
+        "default": "pca",
+        "description": "Dimensionality reduction method {pca} (default=pca)",
+        "enum": false,
+        "mandatory": false,
+        "max": "",
+        "min": "",
+        "subcategory": "",
+        "type": "str"
+    },
+    "selcols": {
+        "advanced": 0,
+        "category": "INPUT",
+        "default": "",
+        "description": "Data column ids to be selected from input data, separated by commas (default=all columns)",
+        "enum": false,
+        "mandatory": false,
+        "max": "",
+        "min": "",
+        "subcategory": "",
+        "type": "str"
+    }
+}
