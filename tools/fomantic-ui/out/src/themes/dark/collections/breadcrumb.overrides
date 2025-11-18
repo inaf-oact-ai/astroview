@@ -1,0 +1,6 @@
+/*******************************
+         Theme Overrides
+*******************************/
+.ui.breadcrumb a {
+    color: @avWhite2 !important;
+}
