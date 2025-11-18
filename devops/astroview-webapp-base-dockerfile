@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/dotnet/aspnet:9.0@sha256:b4bea3a52a0a77317fa93c5bbdb076623f81e3e2f201078d89914da71318b5d8
+
+SHELL ["/bin/bash", "-c"]
+
+RUN apt-get update -y
+RUN apt-get install wget -y
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda3
+RUN source ~/miniconda3/bin/activate
+RUN ~/miniconda3/bin/conda init --all
+RUN ~/miniconda3/bin/conda create --name 3.7 python=3.7 -y
+RUN echo "conda activate 3.7" >> ~/.bashrc
+RUN ~/miniconda3/envs/3.7/bin/pip install pixplot==0.0.112
+RUN ~/miniconda3/envs/3.7/bin/pip install astropy==4.3.1
+RUN ~/miniconda3/envs/3.7/bin/pip install scikit-image==0.19.3

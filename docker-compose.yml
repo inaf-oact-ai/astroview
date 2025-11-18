@@ -1,0 +1,25 @@
+name: astroview
+services:
+  webapp:
+    depends_on:
+      db:
+        condition: service_healthy
+    build:
+      dockerfile: devops/astroview-webapp-dockerfile
+    ports:
+      - 5000:8080
+    volumes:
+      - ${LIBRARY}:/library
+      - ${STORAGE}:/storage
+  db:
+    image: mysql:8.4.3
+    environment:
+      - MYSQL_ROOT_PASSWORD=Password_123
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 55

@@ -1,0 +1,13 @@
+FROM mcr.microsoft.com/dotnet/sdk:9.0@sha256:3fcf6f1e809c0553f9feb222369f58749af314af6f063f389cbd2f913b4ad556 AS build
+WORKDIR /app
+
+COPY src ./
+RUN dotnet restore
+RUN dotnet publish AstroView.WebApp/AstroView.WebApp.csproj -o bin
+
+FROM astroview-webapp-base
+WORKDIR /app
+COPY --from=build /app/bin .
+RUN mkdir -p /library
+RUN mkdir -p /storage
+ENTRYPOINT ["dotnet", "AstroView.WebApp.dll"]
